@@ -36,8 +36,6 @@
             this.bt_saveResult = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nm_Blend = new System.Windows.Forms.NumericUpDown();
-            this.nm_Div = new System.Windows.Forms.NumericUpDown();
-            this.nm_Mult = new System.Windows.Forms.NumericUpDown();
             this.bt_Blend = new System.Windows.Forms.Button();
             this.bt_Med = new System.Windows.Forms.Button();
             this.bt_Div = new System.Windows.Forms.Button();
@@ -62,8 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nm_Blend)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_Div)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_Mult)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -132,8 +128,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.nm_Blend);
-            this.groupBox1.Controls.Add(this.nm_Div);
-            this.groupBox1.Controls.Add(this.nm_Mult);
             this.groupBox1.Controls.Add(this.bt_Blend);
             this.groupBox1.Controls.Add(this.bt_Med);
             this.groupBox1.Controls.Add(this.bt_Div);
@@ -153,20 +147,6 @@
             this.nm_Blend.Name = "nm_Blend";
             this.nm_Blend.Size = new System.Drawing.Size(84, 22);
             this.nm_Blend.TabIndex = 16;
-            // 
-            // nm_Div
-            // 
-            this.nm_Div.Location = new System.Drawing.Point(183, 149);
-            this.nm_Div.Name = "nm_Div";
-            this.nm_Div.Size = new System.Drawing.Size(84, 22);
-            this.nm_Div.TabIndex = 15;
-            // 
-            // nm_Mult
-            // 
-            this.nm_Mult.Location = new System.Drawing.Point(183, 105);
-            this.nm_Mult.Name = "nm_Mult";
-            this.nm_Mult.Size = new System.Drawing.Size(84, 22);
-            this.nm_Mult.TabIndex = 14;
             // 
             // bt_Blend
             // 
@@ -404,8 +384,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nm_Blend)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_Div)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_Mult)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -441,8 +419,6 @@
         private System.Windows.Forms.Button bt_OR;
         private System.Windows.Forms.Button bt_AND;
         private System.Windows.Forms.NumericUpDown nm_Blend;
-        private System.Windows.Forms.NumericUpDown nm_Div;
-        private System.Windows.Forms.NumericUpDown nm_Mult;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_randMat;
         private System.Windows.Forms.Label lb_tam;

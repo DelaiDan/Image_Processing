@@ -89,7 +89,6 @@ namespace ProcessamentoImagens
         private void bt_Mult_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            //int multiplicador = Convert.ToInt32(nm_Mult.Value);
             Bitmap imgResultado = ProcessaHelper.MultImages(Processa1, Processa2);
             picBox3.Image = new Bitmap(imgResultado);
         }
