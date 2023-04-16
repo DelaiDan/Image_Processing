@@ -56,6 +56,7 @@
             this.lb_tam = new System.Windows.Forms.Label();
             this.nm_tam = new System.Windows.Forms.NumericUpDown();
             this.bt_randMat = new System.Windows.Forms.Button();
+            this.bt_espelhar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -315,6 +316,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.bt_espelhar);
             this.groupBox6.Controls.Add(this.lb_tam);
             this.groupBox6.Controls.Add(this.nm_tam);
             this.groupBox6.Controls.Add(this.bt_randMat);
@@ -370,6 +372,16 @@
             this.bt_randMat.Text = "Matrizes Aleatórias";
             this.bt_randMat.UseVisualStyleBackColor = true;
             this.bt_randMat.Click += new System.EventHandler(this.bt_randMat_Click);
+            // 
+            // bt_espelhar
+            // 
+            this.bt_espelhar.Location = new System.Drawing.Point(6, 61);
+            this.bt_espelhar.Name = "bt_espelhar";
+            this.bt_espelhar.Size = new System.Drawing.Size(159, 33);
+            this.bt_espelhar.TabIndex = 19;
+            this.bt_espelhar.Text = "Espelhar Imagem 1";
+            this.bt_espelhar.UseVisualStyleBackColor = true;
+            this.bt_espelhar.Click += new System.EventHandler(this.bt_espelhar_Click);
             // 
             // Form1
             // 
@@ -435,6 +447,7 @@
         private System.Windows.Forms.Button bt_randMat;
         private System.Windows.Forms.Label lb_tam;
         private System.Windows.Forms.NumericUpDown nm_tam;
+        private System.Windows.Forms.Button bt_espelhar;
     }
 }
 

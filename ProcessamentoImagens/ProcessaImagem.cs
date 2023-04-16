@@ -41,10 +41,10 @@ namespace ProcessamentoImagens
             img = bitmap;
             height = img.Height;
             width = img.Width;
-            vImgR = new byte[bitmap.Width, bitmap.Height];
-            vImgG = new byte[bitmap.Width, bitmap.Height];
-            vImgB = new byte[bitmap.Width, bitmap.Height];
-            vImgA = new byte[bitmap.Width, bitmap.Height];
+            vImgR = new byte[bitmap.Height, bitmap.Width];
+            vImgG = new byte[bitmap.Height, bitmap.Width];
+            vImgB = new byte[bitmap.Height, bitmap.Width];
+            vImgA = new byte[bitmap.Height, bitmap.Width];
 
             for (int i = 0; i < bitmap.Height; i++)
             {
@@ -54,20 +54,15 @@ namespace ProcessamentoImagens
 
                     byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
-                    byte R = pixel.R;
-                    byte G = pixel.G;
-                    byte B = pixel.B;
-                    byte A = pixel.A;
-
-                    vImgR[i, j] = R;
-                    vImgG[i, j] = G;
-                    vImgB[i, j] = B;
-                    vImgA[i, j] = A;
+                    vImgR[i, j] = Convert.ToByte(NormalizeRGB(pixel.R));
+                    vImgG[i, j] = Convert.ToByte(NormalizeRGB(pixel.G));
+                    vImgB[i, j] = Convert.ToByte(NormalizeRGB(pixel.B));
+                    vImgA[i, j] = Convert.ToByte(NormalizeRGB(pixel.A));
                 }
             }
         }
 
-        //Adição
+        //Add
         public Bitmap AddImages(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -104,6 +99,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //Subtraction
         public Bitmap SubtImages(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -140,6 +136,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //Multiplication
         public Bitmap MultImages(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -176,6 +173,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //Div
         public Bitmap DivImages(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -212,6 +210,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //Media
         public Bitmap MedImages(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -257,6 +256,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //Blend
         public Bitmap BlendImages(ProcessaImagem img1, ProcessaImagem img2, int scalar)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -301,6 +301,8 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //Logic
+        //NOT
         public Bitmap LogicNOT(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -353,6 +355,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //AND
         public Bitmap LogicAND(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -389,6 +392,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //OR
         public Bitmap LogicOR(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -425,6 +429,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        //XOR
         public Bitmap LogicXOR(ProcessaImagem img1, ProcessaImagem img2)
         {
             Bitmap imgResultado = new Bitmap(img1.img.Width, img1.img.Height);
@@ -461,7 +466,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
-        //Random Matrix
+        //Random Matrixes
         public Bitmap RandomCreateAdd(int size)
         {
             Random rnd = new Random();
@@ -545,6 +550,59 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        public Bitmap MirrorImg(ProcessaImagem img1)
+        {
+            int width = img1.width * 2;
+
+            Bitmap imgResultado = new Bitmap(img1.img.Height, width);
+
+            byte[,] vImgResultR = new byte[img1.img.Height, width];
+            byte[,] vImgResultG = new byte[img1.img.Height, width];
+            byte[,] vImgResultB = new byte[img1.img.Height, width];
+            byte[,] vImgResultA = new byte[img1.img.Height, width];
+
+            //Get image
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if (j >= img1.width)
+                    {
+                        vImgResultA[i, j] = img1.vImgA[i, Math.Abs(width - j - 1)];
+                        vImgResultR[i, j] = img1.vImgR[i, Math.Abs(width - j - 1)];
+                        vImgResultG[i, j] = img1.vImgG[i, Math.Abs(width - j - 1)];
+                        vImgResultB[i, j] = img1.vImgB[i, Math.Abs(width - j - 1)];
+                    }
+                    else
+                    {
+                        vImgResultA[i,j] = img1.vImgA[i, j];
+                        vImgResultR[i,j] = img1.vImgR[i, j];
+                        vImgResultG[i,j] = img1.vImgG[i, j];
+                        vImgResultB[i,j] = img1.vImgB[i, j];
+                    }
+                }
+            }
+
+            //Print Results
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Color c = Color.FromArgb(
+                        vImgResultA[i, j],
+                        vImgResultR[i, j],
+                        vImgResultG[i, j],
+                        vImgResultB[i, j]
+                    );
+
+                    imgResultado.SetPixel(i, j, c);
+                }
+            }
+
+            return imgResultado;
+        }
+
+        //Helper Normalize RGB
         public double NormalizeRGB(double rgb)
         {
             if(rgb >= 255)
@@ -559,27 +617,7 @@ namespace ProcessamentoImagens
             return rgb;
         }
 
-        //Net
-        public Color[][] GetBitMapColorMatrix(string bitmapFilePath)
-        {
-            Bitmap bitmap = new Bitmap(bitmapFilePath);
-
-            int height = bitmap.Height;
-            int width = bitmap.Width;
-
-            Color[][] colorMatrix = new Color[width][];
-
-            for (int i = 0; i < width; i++)
-            {
-                colorMatrix[i] = new Color[height];
-                for (int j = 0; j < height; j++)
-                {
-                    colorMatrix[i][j] = bitmap.GetPixel(i, j);
-                }
-            }
-            return colorMatrix;
-        }
-
+        //Save --In Progress
         public void saveImage(Bitmap drawImage)
         {
             SaveFileDialog dialog = new SaveFileDialog();

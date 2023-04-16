@@ -157,5 +157,12 @@ namespace ProcessamentoImagens
                 picBox3.Image = new Bitmap(imgResultado);
             }
         }
+
+        private void bt_espelhar_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            Bitmap imgResultado = ProcessaHelper.MirrorImg(Processa1);
+            picBox3.Image = new Bitmap(imgResultado);
+        }
     }
 }
