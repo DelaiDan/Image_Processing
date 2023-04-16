@@ -53,6 +53,8 @@
             this.bt_OR = new System.Windows.Forms.Button();
             this.bt_AND = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lb_tam = new System.Windows.Forms.Label();
+            this.nm_tam = new System.Windows.Forms.NumericUpDown();
             this.bt_randMat = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
@@ -66,6 +68,7 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).BeginInit();
             this.SuspendLayout();
             // 
             // picBox1
@@ -312,13 +315,51 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.lb_tam);
+            this.groupBox6.Controls.Add(this.nm_tam);
             this.groupBox6.Controls.Add(this.bt_randMat);
-            this.groupBox6.Location = new System.Drawing.Point(12, 394);
+            this.groupBox6.Location = new System.Drawing.Point(620, 394);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(298, 100);
+            this.groupBox6.Size = new System.Drawing.Size(348, 100);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Operações Adicionais";
+            // 
+            // lb_tam
+            // 
+            this.lb_tam.AutoSize = true;
+            this.lb_tam.Location = new System.Drawing.Point(178, 29);
+            this.lb_tam.Name = "lb_tam";
+            this.lb_tam.Size = new System.Drawing.Size(68, 16);
+            this.lb_tam.TabIndex = 18;
+            this.lb_tam.Text = "Tamanho:";
+            // 
+            // nm_tam
+            // 
+            this.nm_tam.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nm_tam.Location = new System.Drawing.Point(252, 27);
+            this.nm_tam.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.nm_tam.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nm_tam.Name = "nm_tam";
+            this.nm_tam.Size = new System.Drawing.Size(84, 22);
+            this.nm_tam.TabIndex = 17;
+            this.nm_tam.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // bt_randMat
             // 
@@ -358,6 +399,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -390,6 +433,8 @@
         private System.Windows.Forms.NumericUpDown nm_Mult;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_randMat;
+        private System.Windows.Forms.Label lb_tam;
+        private System.Windows.Forms.NumericUpDown nm_tam;
     }
 }
 

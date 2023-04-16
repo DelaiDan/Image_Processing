@@ -462,25 +462,25 @@ namespace ProcessamentoImagens
         }
 
         //Random Matrix
-        public Bitmap RandomCreateAdd()
+        public Bitmap RandomCreateAdd(int size)
         {
             Random rnd = new Random();
-            Bitmap img1 = new Bitmap(100, 100);
-            Bitmap img2 = new Bitmap(100, 100);
+            Bitmap img1 = new Bitmap(size, size);
+            Bitmap img2 = new Bitmap(size, size);
 
-            byte[,] vImg1ResultR = new byte[100, 100];
-            byte[,] vImg1ResultG = new byte[100, 100];
-            byte[,] vImg1ResultB = new byte[100, 100];
+            byte[,] vImg1ResultR = new byte[size, size];
+            byte[,] vImg1ResultG = new byte[size, size];
+            byte[,] vImg1ResultB = new byte[size, size];
 
-            byte[,] vImg2ResultR = new byte[100, 100];
-            byte[,] vImg2ResultG = new byte[100, 100];
-            byte[,] vImg2ResultB = new byte[100, 100];
+            byte[,] vImg2ResultR = new byte[size, size];
+            byte[,] vImg2ResultG = new byte[size, size];
+            byte[,] vImg2ResultB = new byte[size, size];
 
-            byte[,] vImgResultA = new byte[100, 100];
+            byte[,] vImgResultA = new byte[size, size];
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < size; j++)
                 {
                     vImg1ResultR[i, j] = Convert.ToByte(NormalizeRGB(rnd.Next(256)));
                     vImg1ResultG[i, j] = Convert.ToByte(NormalizeRGB(rnd.Next(256)));

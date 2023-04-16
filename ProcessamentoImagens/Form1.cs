@@ -145,8 +145,17 @@ namespace ProcessamentoImagens
         private void bt_randMat_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            Bitmap imgResultado = ProcessaHelper.RandomCreateAdd();
-            picBox3.Image = new Bitmap(imgResultado);
+            int size = Convert.ToInt32(nm_tam.Value);
+            if (size <= 0)
+            {
+                MessageBox.Show("Insira um tamanho Válido!", "Tamanho Inválido",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Bitmap imgResultado = ProcessaHelper.RandomCreateAdd(size);
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
     }
 }
