@@ -51,10 +51,17 @@
             this.bt_OR = new System.Windows.Forms.Button();
             this.bt_AND = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.bt_espelharUD = new System.Windows.Forms.Button();
             this.lb_tam = new System.Windows.Forms.Label();
             this.nm_tam = new System.Windows.Forms.NumericUpDown();
             this.bt_randMat = new System.Windows.Forms.Button();
-            this.bt_espelhar = new System.Windows.Forms.Button();
+            this.bt_espelharLR = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.bt_grayscale = new System.Windows.Forms.Button();
+            this.nm_div = new System.Windows.Forms.NumericUpDown();
+            this.nm_mult = new System.Windows.Forms.NumericUpDown();
+            this.bt_binario = new System.Windows.Forms.Button();
+            this.bt_neg = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -66,6 +73,9 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).BeginInit();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_div)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_mult)).BeginInit();
             this.SuspendLayout();
             // 
             // picBox1
@@ -127,6 +137,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nm_mult);
+            this.groupBox1.Controls.Add(this.nm_div);
             this.groupBox1.Controls.Add(this.nm_Blend);
             this.groupBox1.Controls.Add(this.bt_Blend);
             this.groupBox1.Controls.Add(this.bt_Med);
@@ -143,7 +155,7 @@
             // 
             // nm_Blend
             // 
-            this.nm_Blend.Location = new System.Drawing.Point(183, 227);
+            this.nm_Blend.Location = new System.Drawing.Point(183, 222);
             this.nm_Blend.Name = "nm_Blend";
             this.nm_Blend.Size = new System.Drawing.Size(84, 22);
             this.nm_Blend.TabIndex = 16;
@@ -296,7 +308,8 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.bt_espelhar);
+            this.groupBox6.Controls.Add(this.bt_espelharLR);
+            this.groupBox6.Controls.Add(this.bt_espelharUD);
             this.groupBox6.Controls.Add(this.lb_tam);
             this.groupBox6.Controls.Add(this.nm_tam);
             this.groupBox6.Controls.Add(this.bt_randMat);
@@ -306,6 +319,16 @@
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Operações Adicionais";
+            // 
+            // bt_espelharUD
+            // 
+            this.bt_espelharUD.Location = new System.Drawing.Point(6, 61);
+            this.bt_espelharUD.Name = "bt_espelharUD";
+            this.bt_espelharUD.Size = new System.Drawing.Size(159, 33);
+            this.bt_espelharUD.TabIndex = 19;
+            this.bt_espelharUD.Text = "Espelhar C/B";
+            this.bt_espelharUD.UseVisualStyleBackColor = true;
+            this.bt_espelharUD.Click += new System.EventHandler(this.bt_espelhar_Click);
             // 
             // lb_tam
             // 
@@ -353,21 +376,78 @@
             this.bt_randMat.UseVisualStyleBackColor = true;
             this.bt_randMat.Click += new System.EventHandler(this.bt_randMat_Click);
             // 
-            // bt_espelhar
+            // bt_espelharLR
             // 
-            this.bt_espelhar.Location = new System.Drawing.Point(6, 61);
-            this.bt_espelhar.Name = "bt_espelhar";
-            this.bt_espelhar.Size = new System.Drawing.Size(159, 33);
-            this.bt_espelhar.TabIndex = 19;
-            this.bt_espelhar.Text = "Espelhar Imagem 1";
-            this.bt_espelhar.UseVisualStyleBackColor = true;
-            this.bt_espelhar.Click += new System.EventHandler(this.bt_espelhar_Click);
+            this.bt_espelharLR.Location = new System.Drawing.Point(183, 61);
+            this.bt_espelharLR.Name = "bt_espelharLR";
+            this.bt_espelharLR.Size = new System.Drawing.Size(159, 33);
+            this.bt_espelharLR.TabIndex = 20;
+            this.bt_espelharLR.Text = "Espelhar E/D";
+            this.bt_espelharLR.UseVisualStyleBackColor = true;
+            this.bt_espelharLR.Click += new System.EventHandler(this.bt_espelharLR_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.bt_neg);
+            this.groupBox7.Controls.Add(this.bt_binario);
+            this.groupBox7.Controls.Add(this.bt_grayscale);
+            this.groupBox7.Location = new System.Drawing.Point(192, 394);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(112, 141);
+            this.groupBox7.TabIndex = 13;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Converter";
+            // 
+            // bt_grayscale
+            // 
+            this.bt_grayscale.Location = new System.Drawing.Point(6, 21);
+            this.bt_grayscale.Name = "bt_grayscale";
+            this.bt_grayscale.Size = new System.Drawing.Size(102, 33);
+            this.bt_grayscale.TabIndex = 9;
+            this.bt_grayscale.Text = "Grayscale";
+            this.bt_grayscale.UseVisualStyleBackColor = true;
+            this.bt_grayscale.Click += new System.EventHandler(this.bt_grayscale_Click);
+            // 
+            // nm_div
+            // 
+            this.nm_div.Location = new System.Drawing.Point(183, 144);
+            this.nm_div.Name = "nm_div";
+            this.nm_div.Size = new System.Drawing.Size(84, 22);
+            this.nm_div.TabIndex = 17;
+            // 
+            // nm_mult
+            // 
+            this.nm_mult.Location = new System.Drawing.Point(183, 105);
+            this.nm_mult.Name = "nm_mult";
+            this.nm_mult.Size = new System.Drawing.Size(84, 22);
+            this.nm_mult.TabIndex = 18;
+            // 
+            // bt_binario
+            // 
+            this.bt_binario.Location = new System.Drawing.Point(6, 60);
+            this.bt_binario.Name = "bt_binario";
+            this.bt_binario.Size = new System.Drawing.Size(102, 33);
+            this.bt_binario.TabIndex = 10;
+            this.bt_binario.Text = "Binário";
+            this.bt_binario.UseVisualStyleBackColor = true;
+            this.bt_binario.Click += new System.EventHandler(this.bt_binario_Click);
+            // 
+            // bt_neg
+            // 
+            this.bt_neg.Location = new System.Drawing.Point(6, 99);
+            this.bt_neg.Name = "bt_neg";
+            this.bt_neg.Size = new System.Drawing.Size(102, 33);
+            this.bt_neg.TabIndex = 11;
+            this.bt_neg.Text = "Negativo";
+            this.bt_neg.UseVisualStyleBackColor = true;
+            this.bt_neg.Click += new System.EventHandler(this.bt_neg_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1289, 583);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -391,6 +471,9 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nm_div)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_mult)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -423,7 +506,14 @@
         private System.Windows.Forms.Button bt_randMat;
         private System.Windows.Forms.Label lb_tam;
         private System.Windows.Forms.NumericUpDown nm_tam;
-        private System.Windows.Forms.Button bt_espelhar;
+        private System.Windows.Forms.Button bt_espelharUD;
+        private System.Windows.Forms.Button bt_espelharLR;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button bt_grayscale;
+        private System.Windows.Forms.NumericUpDown nm_mult;
+        private System.Windows.Forms.NumericUpDown nm_div;
+        private System.Windows.Forms.Button bt_binario;
+        private System.Windows.Forms.Button bt_neg;
     }
 }
 

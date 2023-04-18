@@ -160,7 +160,35 @@ namespace ProcessamentoImagens
         private void bt_espelhar_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            Bitmap imgResultado = ProcessaHelper.MirrorImg(Processa1);
+            Bitmap imgResultado = ProcessaHelper.MirrorImgUD(Processa1);
+            picBox3.Image = new Bitmap(imgResultado);
+        }
+
+        private void bt_espelharLR_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            Bitmap imgResultado = ProcessaHelper.MirrorImgLR(Processa1);
+            picBox3.Image = new Bitmap(imgResultado);
+        }
+
+        private void bt_grayscale_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            Bitmap imgResultado = ProcessaHelper.ToGrayscale(Processa1);
+            picBox3.Image = new Bitmap(imgResultado);
+        }
+
+        private void bt_binario_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            Bitmap imgResultado = ProcessaHelper.ToBinary(Processa1);
+            picBox3.Image = new Bitmap(imgResultado);
+        }
+
+        private void bt_neg_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            Bitmap imgResultado = ProcessaHelper.ToNegative(Processa1);
             picBox3.Image = new Bitmap(imgResultado);
         }
     }

@@ -45,6 +45,7 @@ namespace ProcessamentoImagens
             vImgG = new byte[bitmap.Height, bitmap.Width];
             vImgB = new byte[bitmap.Height, bitmap.Width];
             vImgA = new byte[bitmap.Height, bitmap.Width];
+            vImgGray = new byte[bitmap.Height, bitmap.Width];
 
             for (int i = 0; i < bitmap.Height; i++)
             {
@@ -52,8 +53,9 @@ namespace ProcessamentoImagens
                 {
                     Color pixel = bitmap.GetPixel(i, j);
 
-                    byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
+                    double pixelIntensity = (pixel.R + pixel.G + pixel.B) / 3;
 
+                    vImgGray[i, j] = Convert.ToByte(NormalizeRGB(pixelIntensity));
                     vImgR[i, j] = Convert.ToByte(NormalizeRGB(pixel.R));
                     vImgG[i, j] = Convert.ToByte(NormalizeRGB(pixel.G));
                     vImgB[i, j] = Convert.ToByte(NormalizeRGB(pixel.B));
@@ -329,42 +331,26 @@ namespace ProcessamentoImagens
             byte[,] vImgResultB = new byte[img1.height, img1.width];
             byte[,] vImgResultA = new byte[img1.height, img1.width];
 
-            int maxR = 0;
-            int maxG = 0;
-            int maxB = 0;
-
             for (int i = 0; i < img1.height; i++)
             {
                 for (int j = 0; j < img1.width; j++)
                 {
                     Color Img1Pixel = img1.img.GetPixel(i, j);
+                    Color Img2Pixel = img2.img.GetPixel(i, j);
 
-                    vImgResultR[i, j] = Img1Pixel.R;
-                    vImgResultG[i, j] = Img1Pixel.G;
-                    vImgResultB[i, j] = Img1Pixel.B;
-                    vImgResultA[i, j] = Img1Pixel.A;
+                    //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
-                    if(maxR < Img1Pixel.R)
-                    {
-                        maxR = Img1Pixel.R;
-                    }
-                    if(maxG < Img1Pixel.G)
-                    {
-                        maxG = Img1Pixel.G;
-                    }
-                    if(maxB < Img1Pixel.B)
-                    {
-                        maxB = Img1Pixel.B;
-                    }
+                    vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.R & Img2Pixel.R));
+                    vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.G & Img2Pixel.G));
+                    vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.B & Img2Pixel.B));
+                    vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.A));
 
                     Color c = Color.FromArgb(
                         vImgResultA[i, j],
-                        maxR - vImgResultR[i, j],
-                        maxG - vImgResultG[i, j],
-                        maxB - vImgResultB[i, j]
+                        vImgResultR[i, j],
+                        vImgResultG[i, j],
+                        vImgResultB[i, j]
                         );
-
-                    //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
                     imgResultado.SetPixel(i, j, c);
                 }
@@ -568,7 +554,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
-        public Bitmap MirrorImg(ProcessaImagem img1)
+        public Bitmap MirrorImgUD(ProcessaImagem img1)
         {
             int width = img1.width * 2;
 
@@ -620,6 +606,174 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
+        public Bitmap MirrorImgLR(ProcessaImagem img1)
+        {
+            int width = img1.width * 2;
+
+            Bitmap imgResultado = new Bitmap(img1.img.Height, width);
+
+            byte[,] vImgResultR = new byte[img1.img.Height, width];
+            byte[,] vImgResultG = new byte[img1.img.Height, width];
+            byte[,] vImgResultB = new byte[img1.img.Height, width];
+            byte[,] vImgResultA = new byte[img1.img.Height, width];
+
+            //Get image
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if (j >= img1.width)
+                    {
+                        vImgResultA[i, j] = img1.vImgA[i, Math.Abs(width - j - 1)];
+                        vImgResultR[i, j] = img1.vImgR[i, Math.Abs(width - j - 1)];
+                        vImgResultG[i, j] = img1.vImgG[i, Math.Abs(width - j - 1)];
+                        vImgResultB[i, j] = img1.vImgB[i, Math.Abs(width - j - 1)];
+                    }
+                    else
+                    {
+                        vImgResultA[i, j] = img1.vImgA[i, j];
+                        vImgResultR[i, j] = img1.vImgR[i, j];
+                        vImgResultG[i, j] = img1.vImgG[i, j];
+                        vImgResultB[i, j] = img1.vImgB[i, j];
+                    }
+                }
+            }
+
+            //Print Results
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Color c = Color.FromArgb(
+                        vImgResultA[i, j],
+                        vImgResultR[i, j],
+                        vImgResultG[i, j],
+                        vImgResultB[i, j]
+                    );
+
+                    imgResultado.SetPixel(i, j, c);
+                }
+            }
+
+            return imgResultado;
+        }
+
+        public Bitmap ToGrayscale(ProcessaImagem img1)
+        {
+            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            byte[,] vImgResultG = new byte[img1.height, img1.width];
+            byte[,] vImgResultB = new byte[img1.height, img1.width];
+            byte[,] vImgResultR = new byte[img1.height, img1.width];
+            byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+
+                    vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i,j]));
+                    vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i,j]));
+                    vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i,j]));
+                    vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgA[i,j]));
+
+                    Color c = Color.FromArgb(
+                        vImgResultA[i, j],
+                        vImgResultR[i, j],
+                        vImgResultG[i, j],
+                        vImgResultB[i, j]
+                        );
+
+                    imgResultado.SetPixel(i, j, c);
+                }
+            }
+
+            return imgResultado;
+        }
+
+        public Bitmap ToBinary(ProcessaImagem img1)
+        {
+            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            byte[,] vImgResultG = new byte[img1.height, img1.width];
+            byte[,] vImgResultB = new byte[img1.height, img1.width];
+            byte[,] vImgResultR = new byte[img1.height, img1.width];
+            byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+
+                    vImgResultR[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgR[i, j]));
+                    vImgResultG[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgG[i, j]));
+                    vImgResultB[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgB[i, j]));
+                    vImgResultA[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgA[i, j]));
+
+                    Color c = Color.FromArgb(
+                        vImgResultA[i, j],
+                        vImgResultR[i, j],
+                        vImgResultG[i, j],
+                        vImgResultB[i, j]
+                        );
+
+                    imgResultado.SetPixel(i, j, c);
+                }
+            }
+
+            return imgResultado;
+        }
+
+        public Bitmap ToNegative(ProcessaImagem img1)
+        {
+            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            byte[,] vImgResultR = new byte[img1.height, img1.width];
+            byte[,] vImgResultG = new byte[img1.height, img1.width];
+            byte[,] vImgResultB = new byte[img1.height, img1.width];
+            byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+            int maxR = 0;
+            int maxG = 0;
+            int maxB = 0;
+
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+                    Color Img1Pixel = img1.img.GetPixel(i, j);
+
+                    vImgResultR[i, j] = Img1Pixel.R;
+                    vImgResultG[i, j] = Img1Pixel.G;
+                    vImgResultB[i, j] = Img1Pixel.B;
+                    vImgResultA[i, j] = Img1Pixel.A;
+
+                    if (maxR < Img1Pixel.R)
+                    {
+                        maxR = Img1Pixel.R;
+                    }
+                    if (maxG < Img1Pixel.G)
+                    {
+                        maxG = Img1Pixel.G;
+                    }
+                    if (maxB < Img1Pixel.B)
+                    {
+                        maxB = Img1Pixel.B;
+                    }
+
+                    Color c = Color.FromArgb(
+                        vImgResultA[i, j],
+                        maxR - vImgResultR[i, j],
+                        maxG - vImgResultG[i, j],
+                        maxB - vImgResultB[i, j]
+                        );
+
+                    //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
+
+                    imgResultado.SetPixel(i, j, c);
+                }
+            }
+
+            return imgResultado;
+        }
+
         //Helper Normalize RGB
         public double NormalizeRGB(double rgb)
         {
@@ -628,6 +782,21 @@ namespace ProcessamentoImagens
                 rgb = 255;
             } 
             else if(rgb <= 0)
+            {
+                rgb = 0;
+            }
+
+            return rgb;
+        }
+
+        //Helper Convert Binary
+        public double ConvertToBinary(double rgb)
+        {
+            if (rgb >= 128)
+            {
+                rgb = 255;
+            }
+            else if (rgb < 128)
             {
                 rgb = 0;
             }
