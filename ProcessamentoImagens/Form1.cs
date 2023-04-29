@@ -69,42 +69,60 @@ namespace ProcessamentoImagens
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.AddImages(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if(imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_Subt_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.SubtImages(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_NOT_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.LogicNOT(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_Mult_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.MultImages(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_Med_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.MedImages(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_Div_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.DivImages(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_Blend_Click(object sender, EventArgs e)
@@ -112,33 +130,49 @@ namespace ProcessamentoImagens
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             int scalar = Convert.ToInt32(nm_Blend.Value);
             Bitmap imgResultado = ProcessaHelper.BlendImages(Processa1, Processa2, scalar);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_AND_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.LogicAND(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_OR_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.LogicOR(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_XOR_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.LogicXOR(Processa1, Processa2);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_saveResult_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog dialog = new SaveFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                picBox3.Image.Save(dialog.FileName, ImageFormat.Jpeg);
+            }
         }
 
         private void bt_randMat_Click(object sender, EventArgs e)
@@ -153,7 +187,10 @@ namespace ProcessamentoImagens
             else
             {
                 Bitmap imgResultado = ProcessaHelper.RandomCreateAdd(size);
-                picBox3.Image = new Bitmap(imgResultado);
+                if (imgResultado != null)
+                {
+                    picBox3.Image = new Bitmap(imgResultado);
+                }
             }
         }
 
@@ -161,35 +198,50 @@ namespace ProcessamentoImagens
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.MirrorImgUD(Processa1);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_espelharLR_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.MirrorImgLR(Processa1);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_grayscale_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.ToGrayscale(Processa1);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_binario_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.ToBinary(Processa1);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
 
         private void bt_neg_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Bitmap imgResultado = ProcessaHelper.ToNegative(Processa1);
-            picBox3.Image = new Bitmap(imgResultado);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
         }
     }
 }
