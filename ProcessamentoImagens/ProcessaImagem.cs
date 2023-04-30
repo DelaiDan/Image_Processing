@@ -51,7 +51,7 @@ namespace ProcessamentoImagens
             {
                 for (int j = 0; j < width; j++)
                 {
-                    Color pixel = bitmap.GetPixel(i, j);
+                    Color pixel = bitmap.GetPixel(j, i);
 
                     double pixelIntensity = (pixel.R + pixel.G + pixel.B) / 3;
 
@@ -79,8 +79,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -96,7 +96,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -120,8 +120,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -137,7 +137,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -161,8 +161,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -178,7 +178,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -211,8 +211,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         pixelR1 = DivHelper(Img1Pixel.R);
                         pixelG1 = DivHelper(Img1Pixel.G);
@@ -237,7 +237,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -266,8 +266,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -287,7 +287,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -315,8 +315,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -336,7 +336,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -361,8 +361,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -378,7 +378,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -402,8 +402,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -419,7 +419,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -443,8 +443,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -460,7 +460,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -484,8 +484,8 @@ namespace ProcessamentoImagens
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(i, j);
-                        Color Img2Pixel = img2.img.GetPixel(i, j);
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
+                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -501,7 +501,7 @@ namespace ProcessamentoImagens
                             vImgResultB[i, j]
                             );
 
-                        imgResultado.SetPixel(i, j, c);
+                        imgResultado.SetPixel(j, i, c);
                     }
                 }
 
@@ -556,8 +556,8 @@ namespace ProcessamentoImagens
                         vImg2ResultB[i, j]
                         );
 
-                    img1.SetPixel(i, j, c1);
-                    img2.SetPixel(i, j, c2);
+                    img1.SetPixel(j, i, c1);
+                    img2.SetPixel(j, i, c2);
                 }
             }
 
@@ -570,8 +570,8 @@ namespace ProcessamentoImagens
             {
                 for (int j = 0; j < img1.Width; j++)
                 {
-                    Color Img1Pixel = img1.GetPixel(i, j);
-                    Color Img2Pixel = img2.GetPixel(i, j);
+                    Color Img1Pixel = img1.GetPixel(j, i);
+                    Color Img2Pixel = img2.GetPixel(j, i);
 
                     //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
@@ -587,7 +587,7 @@ namespace ProcessamentoImagens
                         vImgResultB[i, j]
                         );
 
-                    imgResultado.SetPixel(i, j, c);
+                    imgResultado.SetPixel(j, i, c);
                 }
             }
 
@@ -639,7 +639,7 @@ namespace ProcessamentoImagens
                         vImgResultB[i, j]
                     );
 
-                    imgResultado.SetPixel(i, j, c);
+                    imgResultado.SetPixel(j, i, c);
                 }
             }
 
@@ -691,7 +691,7 @@ namespace ProcessamentoImagens
                         vImgResultB[i, j]
                     );
 
-                    imgResultado.SetPixel(i, j, c);
+                    imgResultado.SetPixel(j, i, c);
                 }
             }
 
@@ -723,7 +723,7 @@ namespace ProcessamentoImagens
                         vImgResultB[i, j]
                         );
 
-                    imgResultado.SetPixel(i, j, c);
+                    imgResultado.SetPixel(j, i, c);
                 }
             }
 
@@ -755,7 +755,7 @@ namespace ProcessamentoImagens
                         vImgResultB[i, j]
                         );
 
-                    imgResultado.SetPixel(i, j, c);
+                    imgResultado.SetPixel(j, i, c);
                 }
             }
 
@@ -778,7 +778,7 @@ namespace ProcessamentoImagens
             {
                 for (int j = 0; j < img1.width; j++)
                 {
-                    Color Img1Pixel = img1.img.GetPixel(i, j);
+                    Color Img1Pixel = img1.img.GetPixel(j, i);
 
                     vImgResultR[i, j] = Img1Pixel.R;
                     vImgResultG[i, j] = Img1Pixel.G;
@@ -807,7 +807,82 @@ namespace ProcessamentoImagens
 
                     //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
-                    imgResultado.SetPixel(i, j, c);
+                    imgResultado.SetPixel(j, i, c);
+                }
+            }
+
+            return imgResultado;
+        }
+
+        public Bitmap Histogram(ProcessaImagem img1)
+        {
+            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            byte[,] img = img1.vImgGray;
+
+            int[] histogramFinalImg = new int[256];
+
+            // Calcula o histograma da imagem
+            int[] histogram = new int[256];
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+                    histogram[img[i, j]]++;
+                }
+            }
+
+            // Calcula a função de distribuição acumulada (CDF) do histograma, normalizada para ter valores entre 0 e 1
+            double[] cdf = new double[256];
+            int pixelsCount = img1.width * img1.height;
+            cdf[0] = histogram[0] / (double)pixelsCount;
+
+            for (int i = 1; i < 256; i++)
+            {
+                cdf[i] = cdf[i - 1] + histogram[i] / (double)pixelsCount;
+            }
+
+            // Mapeia cada valor de pixel para um novo valor com base na CDF, escalonando para o intervalo [0, 255]
+            int[,] equalizedImg = new int[width, height];
+
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+                    int oldPixelValue = img[i, j];
+                    int newPixelValue = (int)Math.Round(cdf[oldPixelValue] * 255.0);
+                    equalizedImg[i, j] = newPixelValue;
+                }
+            }
+
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+                    histogramFinalImg[equalizedImg[i, j]]++;
+                }
+            }
+
+            /*
+            chart1.Series.Clear();
+            chart1.Series.Add("Histograma");
+            chart1.Series["Histograma"].ChartType = SeriesChartType.Column;
+            chart1.Series["Histograma"].Points.DataBindY(histogram);
+            chart1.ChartAreas[0].AxisY.Maximum = histogram.Max() + 10;
+
+            chart2.Series.Clear();
+            chart2.Series.Add("ImgResult");
+            chart2.Series["ImgResult"].ChartType = SeriesChartType.Column;
+            chart2.Series["ImgResult"].Points.DataBindY(histogramFinalImg);
+            chart2.ChartAreas[0].AxisY.Maximum = histogramFinalImg.Max() + 10;
+            */
+
+
+            for (int i = 0; i < img1.width; i++)
+            {
+                for (int j = 0; j < img1.height; j++)
+                {
+                    Color c = Color.FromArgb(equalizedImg[i, j], equalizedImg[i, j], equalizedImg[i, j]);
+                    imgResultado.SetPixel(j, i, c);
                 }
             }
 

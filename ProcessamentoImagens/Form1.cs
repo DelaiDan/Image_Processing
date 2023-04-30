@@ -243,5 +243,15 @@ namespace ProcessamentoImagens
                 picBox3.Image = new Bitmap(imgResultado);
             }
         }
+
+        private void bt_hist_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            Bitmap imgResultado = ProcessaHelper.Histogram(Processa1);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
+        }
     }
 }
