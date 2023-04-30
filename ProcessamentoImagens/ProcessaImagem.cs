@@ -842,7 +842,7 @@ namespace ProcessamentoImagens
             }
 
             // Mapeia cada valor de pixel para um novo valor com base na CDF, escalonando para o intervalo [0, 255]
-            int[,] equalizedImg = new int[width, height];
+            int[,] equalizedImg = new int[img1.width, img1.height];
 
             for (int i = 0; i < img1.height; i++)
             {
