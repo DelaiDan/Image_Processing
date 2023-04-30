@@ -69,7 +69,7 @@ namespace ProcessamentoImagens
         {
             if(CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -110,7 +110,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -151,7 +151,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -192,7 +192,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -251,7 +251,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -301,7 +301,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -351,7 +351,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -392,7 +392,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -433,7 +433,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -474,7 +474,7 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
-                Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -561,7 +561,7 @@ namespace ProcessamentoImagens
                 }
             }
 
-            Bitmap imgResultado = new Bitmap(img1.Height, img1.Width);
+            Bitmap imgResultado = new Bitmap(img1.Width, img1.Height);
             byte[,] vImgResultR = new byte[img1.Height, img1.Width];
             byte[,] vImgResultG = new byte[img1.Height, img1.Width];
             byte[,] vImgResultB = new byte[img1.Height, img1.Width];
@@ -596,41 +596,41 @@ namespace ProcessamentoImagens
 
         public Bitmap MirrorImgUD(ProcessaImagem img1)
         {
-            int width = img1.width * 2;
+            int height = img1.height * 2;
 
-            Bitmap imgResultado = new Bitmap(img1.img.Height, width);
+            Bitmap imgResultado = new Bitmap(img1.width, height);
 
-            byte[,] vImgResultR = new byte[img1.img.Height, width];
-            byte[,] vImgResultG = new byte[img1.img.Height, width];
-            byte[,] vImgResultB = new byte[img1.img.Height, width];
-            byte[,] vImgResultA = new byte[img1.img.Height, width];
+            byte[,] vImgResultR = new byte[height, img1.width];
+            byte[,] vImgResultG = new byte[height, img1.width];
+            byte[,] vImgResultB = new byte[height, img1.width];
+            byte[,] vImgResultA = new byte[height, img1.width];
 
             //Get image
-            for (int i = 0; i < img1.height; i++)
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < img1.width; j++)
                 {
-                    if (j >= img1.width)
+                    if (i >= img1.height)
                     {
-                        vImgResultA[i, j] = img1.vImgA[i, Math.Abs(width - j - 1)];
-                        vImgResultR[i, j] = img1.vImgR[i, Math.Abs(width - j - 1)];
-                        vImgResultG[i, j] = img1.vImgG[i, Math.Abs(width - j - 1)];
-                        vImgResultB[i, j] = img1.vImgB[i, Math.Abs(width - j - 1)];
+                        vImgResultA[i, j] = img1.vImgA[Math.Abs(height - i - 1), j];
+                        vImgResultR[i, j] = img1.vImgR[Math.Abs(height - i - 1), j];
+                        vImgResultG[i, j] = img1.vImgG[Math.Abs(height - i - 1), j];
+                        vImgResultB[i, j] = img1.vImgB[Math.Abs(height - i - 1), j];
                     }
                     else
                     {
-                        vImgResultA[i,j] = img1.vImgA[i, j];
-                        vImgResultR[i,j] = img1.vImgR[i, j];
-                        vImgResultG[i,j] = img1.vImgG[i, j];
-                        vImgResultB[i,j] = img1.vImgB[i, j];
+                        vImgResultA[i, j] = img1.vImgA[i, j];
+                        vImgResultR[i, j] = img1.vImgR[i, j];
+                        vImgResultG[i, j] = img1.vImgG[i, j];
+                        vImgResultB[i, j] = img1.vImgB[i, j];
                     }
                 }
             }
 
             //Print Results
-            for (int i = 0; i < img1.height; i++)
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < img1.width; j++)
                 {
                     Color c = Color.FromArgb(
                         vImgResultA[i, j],
@@ -650,12 +650,12 @@ namespace ProcessamentoImagens
         {
             int width = img1.width * 2;
 
-            Bitmap imgResultado = new Bitmap(img1.img.Height, width);
+            Bitmap imgResultado = new Bitmap(width, img1.height);
 
-            byte[,] vImgResultR = new byte[img1.img.Height, width];
-            byte[,] vImgResultG = new byte[img1.img.Height, width];
-            byte[,] vImgResultB = new byte[img1.img.Height, width];
-            byte[,] vImgResultA = new byte[img1.img.Height, width];
+            byte[,] vImgResultR = new byte[img1.height, width];
+            byte[,] vImgResultG = new byte[img1.height, width];
+            byte[,] vImgResultB = new byte[img1.height, width];
+            byte[,] vImgResultA = new byte[img1.height, width];
 
             //Get image
             for (int i = 0; i < img1.height; i++)
@@ -700,7 +700,7 @@ namespace ProcessamentoImagens
 
         public Bitmap ToGrayscale(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
             byte[,] vImgResultG = new byte[img1.height, img1.width];
             byte[,] vImgResultB = new byte[img1.height, img1.width];
             byte[,] vImgResultR = new byte[img1.height, img1.width];
@@ -732,7 +732,7 @@ namespace ProcessamentoImagens
 
         public Bitmap ToBinary(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
             byte[,] vImgResultG = new byte[img1.height, img1.width];
             byte[,] vImgResultB = new byte[img1.height, img1.width];
             byte[,] vImgResultR = new byte[img1.height, img1.width];
@@ -764,7 +764,7 @@ namespace ProcessamentoImagens
 
         public Bitmap ToNegative(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
             byte[,] vImgResultR = new byte[img1.height, img1.width];
             byte[,] vImgResultG = new byte[img1.height, img1.width];
             byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -816,7 +816,7 @@ namespace ProcessamentoImagens
 
         public Bitmap Histogram(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.height, img1.width);
+            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
             byte[,] img = img1.vImgGray;
 
             int[] histogramFinalImg = new int[256];
