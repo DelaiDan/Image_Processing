@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ProcessamentoImagens
 {
@@ -247,7 +248,67 @@ namespace ProcessamentoImagens
         private void bt_hist_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            Bitmap imgResultado = ProcessaHelper.Histogram(Processa1);
+            Object[] obj = ProcessaHelper.Histogram(Processa1);
+            Bitmap imgResultado = (Bitmap)obj[0];
+
+            if (imgResultado != null)
+            {
+                int[] histogram = (int[])obj[1];
+                int[] histogramFinalImg = (int[])obj[2];
+
+                hist1.Series.Clear();
+                hist1.Series.Add("Histograma");
+                hist1.Series["Histograma"].ChartType = SeriesChartType.Column;
+                hist1.Series["Histograma"].Points.DataBindY(histogram);
+                hist1.ChartAreas[0].AxisY.Maximum = histogram.Max() + 10;
+
+                hist2.Series.Clear();
+                hist2.Series.Add("ImgResult");
+                hist2.Series["ImgResult"].ChartType = SeriesChartType.Column;
+                hist2.Series["ImgResult"].Points.DataBindY(histogramFinalImg);
+                hist2.ChartAreas[0].AxisY.Maximum = histogramFinalImg.Max() + 10;
+                
+                picBox3.Image = new Bitmap(imgResultado);
+            }
+        }
+
+        private void bt_filter_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+
+            int maskSize = 3;
+            int tipoFiltro = 1;
+
+            //Filter Size (3x3, 5x5, 7x7)
+            if (rd_3_3.Checked)
+            {
+                maskSize = 3;
+            }
+            else if (rd_5_5.Checked)
+            {
+                maskSize = 5;
+            }
+            else if (rd_7_7.Checked)
+            {
+                maskSize = 7;
+            }
+
+            //Filter Type (MAX, MIN, MED)
+            if (rd_max.Checked)
+            {
+                tipoFiltro = 1;
+            }
+            else if (rd_min.Checked)
+            {
+                tipoFiltro = 2;
+            }
+            else if (rd_med.Checked)
+            {
+                tipoFiltro = 3;
+            }
+
+            Bitmap imgResultado = ProcessaHelper.ApplyFilter(Processa1, maskSize, tipoFiltro);
+
             if (imgResultado != null)
             {
                 picBox3.Image = new Bitmap(imgResultado);

@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.picBox1 = new System.Windows.Forms.PictureBox();
             this.picBox2 = new System.Windows.Forms.PictureBox();
             this.picBox3 = new System.Windows.Forms.PictureBox();
@@ -64,6 +70,18 @@
             this.bt_grayscale = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.bt_hist = new System.Windows.Forms.Button();
+            this.hist1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.hist2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.rd_med = new System.Windows.Forms.RadioButton();
+            this.rd_max = new System.Windows.Forms.RadioButton();
+            this.rd_min = new System.Windows.Forms.RadioButton();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.rd_7_7 = new System.Windows.Forms.RadioButton();
+            this.rd_3_3 = new System.Windows.Forms.RadioButton();
+            this.rd_5_5 = new System.Windows.Forms.RadioButton();
+            this.bt_filter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -79,6 +97,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hist1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hist2)).BeginInit();
+            this.groupBox9.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // picBox1
@@ -465,11 +488,158 @@
             this.bt_hist.UseVisualStyleBackColor = true;
             this.bt_hist.Click += new System.EventHandler(this.bt_hist_Click);
             // 
+            // hist1
+            // 
+            chartArea5.Name = "ChartArea1";
+            this.hist1.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.hist1.Legends.Add(legend5);
+            this.hist1.Location = new System.Drawing.Point(18, 545);
+            this.hist1.Name = "hist1";
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.hist1.Series.Add(series5);
+            this.hist1.Size = new System.Drawing.Size(445, 300);
+            this.hist1.TabIndex = 15;
+            this.hist1.Text = "chart1";
+            // 
+            // hist2
+            // 
+            chartArea6.Name = "ChartArea1";
+            this.hist2.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.hist2.Legends.Add(legend6);
+            this.hist2.Location = new System.Drawing.Point(827, 545);
+            this.hist2.Name = "hist2";
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.hist2.Series.Add(series6);
+            this.hist2.Size = new System.Drawing.Size(445, 300);
+            this.hist2.TabIndex = 16;
+            this.hist2.Text = "chart2";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.groupBox11);
+            this.groupBox9.Controls.Add(this.groupBox10);
+            this.groupBox9.Controls.Add(this.bt_filter);
+            this.groupBox9.Location = new System.Drawing.Point(980, 394);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(292, 141);
+            this.groupBox9.TabIndex = 21;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Realce de Imagens";
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.rd_med);
+            this.groupBox11.Controls.Add(this.rd_max);
+            this.groupBox11.Controls.Add(this.rd_min);
+            this.groupBox11.Location = new System.Drawing.Point(6, 27);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(280, 48);
+            this.groupBox11.TabIndex = 17;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Tipo";
+            // 
+            // rd_med
+            // 
+            this.rd_med.AutoSize = true;
+            this.rd_med.Location = new System.Drawing.Point(216, 21);
+            this.rd_med.Name = "rd_med";
+            this.rd_med.Size = new System.Drawing.Size(58, 20);
+            this.rd_med.TabIndex = 15;
+            this.rd_med.TabStop = true;
+            this.rd_med.Text = "MED";
+            this.rd_med.UseVisualStyleBackColor = true;
+            // 
+            // rd_max
+            // 
+            this.rd_max.AutoSize = true;
+            this.rd_max.Location = new System.Drawing.Point(6, 21);
+            this.rd_max.Name = "rd_max";
+            this.rd_max.Size = new System.Drawing.Size(56, 20);
+            this.rd_max.TabIndex = 13;
+            this.rd_max.TabStop = true;
+            this.rd_max.Text = "MAX";
+            this.rd_max.UseVisualStyleBackColor = true;
+            // 
+            // rd_min
+            // 
+            this.rd_min.AutoSize = true;
+            this.rd_min.Location = new System.Drawing.Point(117, 21);
+            this.rd_min.Name = "rd_min";
+            this.rd_min.Size = new System.Drawing.Size(52, 20);
+            this.rd_min.TabIndex = 14;
+            this.rd_min.TabStop = true;
+            this.rd_min.Text = "MIN";
+            this.rd_min.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.rd_7_7);
+            this.groupBox10.Controls.Add(this.rd_3_3);
+            this.groupBox10.Controls.Add(this.rd_5_5);
+            this.groupBox10.Location = new System.Drawing.Point(6, 84);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(196, 48);
+            this.groupBox10.TabIndex = 16;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Tamanho";
+            // 
+            // rd_7_7
+            // 
+            this.rd_7_7.AutoSize = true;
+            this.rd_7_7.Location = new System.Drawing.Point(142, 22);
+            this.rd_7_7.Name = "rd_7_7";
+            this.rd_7_7.Size = new System.Drawing.Size(48, 20);
+            this.rd_7_7.TabIndex = 15;
+            this.rd_7_7.TabStop = true;
+            this.rd_7_7.Text = "7x7";
+            this.rd_7_7.UseVisualStyleBackColor = true;
+            // 
+            // rd_3_3
+            // 
+            this.rd_3_3.AutoSize = true;
+            this.rd_3_3.Location = new System.Drawing.Point(6, 22);
+            this.rd_3_3.Name = "rd_3_3";
+            this.rd_3_3.Size = new System.Drawing.Size(48, 20);
+            this.rd_3_3.TabIndex = 13;
+            this.rd_3_3.TabStop = true;
+            this.rd_3_3.Text = "3x3";
+            this.rd_3_3.UseVisualStyleBackColor = true;
+            // 
+            // rd_5_5
+            // 
+            this.rd_5_5.AutoSize = true;
+            this.rd_5_5.Location = new System.Drawing.Point(75, 22);
+            this.rd_5_5.Name = "rd_5_5";
+            this.rd_5_5.Size = new System.Drawing.Size(48, 20);
+            this.rd_5_5.TabIndex = 14;
+            this.rd_5_5.TabStop = true;
+            this.rd_5_5.Text = "5x5";
+            this.rd_5_5.UseVisualStyleBackColor = true;
+            // 
+            // bt_filter
+            // 
+            this.bt_filter.Location = new System.Drawing.Point(208, 81);
+            this.bt_filter.Name = "bt_filter";
+            this.bt_filter.Size = new System.Drawing.Size(78, 54);
+            this.bt_filter.TabIndex = 10;
+            this.bt_filter.Text = "Aplicar";
+            this.bt_filter.UseVisualStyleBackColor = true;
+            this.bt_filter.Click += new System.EventHandler(this.bt_filter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1289, 583);
+            this.ClientSize = new System.Drawing.Size(1289, 868);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.hist2);
+            this.Controls.Add(this.hist1);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -499,6 +669,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hist1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hist2)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -541,6 +718,18 @@
         private System.Windows.Forms.Button bt_neg;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button bt_hist;
+        private System.Windows.Forms.DataVisualization.Charting.Chart hist1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart hist2;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button bt_filter;
+        private System.Windows.Forms.RadioButton rd_7_7;
+        private System.Windows.Forms.RadioButton rd_5_5;
+        private System.Windows.Forms.RadioButton rd_3_3;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.RadioButton rd_med;
+        private System.Windows.Forms.RadioButton rd_max;
+        private System.Windows.Forms.RadioButton rd_min;
+        private System.Windows.Forms.GroupBox groupBox10;
     }
 }
 

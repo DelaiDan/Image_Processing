@@ -814,7 +814,7 @@ namespace ProcessamentoImagens
             return imgResultado;
         }
 
-        public Bitmap Histogram(ProcessaImagem img1)
+        public Object[] Histogram(ProcessaImagem img1)
         {
             Bitmap imgResultado = new Bitmap(img1.width, img1.height);
             byte[,] img = img1.vImgGray;
@@ -862,21 +862,6 @@ namespace ProcessamentoImagens
                 }
             }
 
-            /*
-            chart1.Series.Clear();
-            chart1.Series.Add("Histograma");
-            chart1.Series["Histograma"].ChartType = SeriesChartType.Column;
-            chart1.Series["Histograma"].Points.DataBindY(histogram);
-            chart1.ChartAreas[0].AxisY.Maximum = histogram.Max() + 10;
-
-            chart2.Series.Clear();
-            chart2.Series.Add("ImgResult");
-            chart2.Series["ImgResult"].ChartType = SeriesChartType.Column;
-            chart2.Series["ImgResult"].Points.DataBindY(histogramFinalImg);
-            chart2.ChartAreas[0].AxisY.Maximum = histogramFinalImg.Max() + 10;
-            */
-
-
             for (int i = 0; i < img1.width; i++)
             {
                 for (int j = 0; j < img1.height; j++)
@@ -886,11 +871,191 @@ namespace ProcessamentoImagens
                 }
             }
 
+            Object[] array = { imgResultado, histogram, histogramFinalImg };
+
+            return array;
+        }
+
+        //Image Filters
+        public Bitmap ApplyFilter(ProcessaImagem img1, int maskSize = 3, int type = 1)
+        {
+            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+            byte[,] imgResultadoHelper = new byte[img1.height, img1.width];
+
+            int maskI = 0;
+            int maskJ = 0;
+
+            if(maskSize == 3)
+            {
+                maskI = 1;
+                maskJ = 1;
+
+            } else if(maskSize == 5)
+            {
+                maskI = 2;
+                maskJ = 2;
+
+            } else if(maskSize == 7)
+            {
+                maskI = 3;
+                maskJ = 3;
+            }
+
+            for (int i = maskI; i < (img1.height - maskI); i++)
+            {
+                for (int j = maskJ; j < (img1.width - maskJ); j++)
+                {
+                    byte[] mask = new byte[maskSize * maskSize];
+                    int mean = 0;
+
+                    for (int w = 0; w < mask.Length; w++) mask[w] = 1;
+
+                    if (maskSize == 3)
+                    {
+                        mask[0] = (byte)(mask[0] * img1.vImgGray[i - 1, j - 1]);
+                        mask[1] = (byte)(mask[1] * img1.vImgGray[i - 1, j]);
+                        mask[2] = (byte)(mask[2] * img1.vImgGray[i - 1, j + 1]);
+
+                        mask[3] = (byte)(mask[3] * img1.vImgGray[i, j - 1]);
+                        mask[4] = (byte)(mask[4] * img1.vImgGray[i, j]);
+                        mask[5] = (byte)(mask[5] * img1.vImgGray[i, j + 1]);
+
+                        mask[6] = (byte)(mask[6] * img1.vImgGray[i + 1, j - 1]);
+                        mask[7] = (byte)(mask[7] * img1.vImgGray[i + 1, j]);
+                        mask[8] = (byte)(mask[8] * img1.vImgGray[i + 1, j + 1]);
+
+                    }
+                    else if (maskSize == 5)
+                    {
+                        mask[0] = (byte)(mask[0] * img1.vImgGray[i - 2, j - 2]);
+                        mask[1] = (byte)(mask[1] * img1.vImgGray[i - 2, j - 1]);
+                        mask[2] = (byte)(mask[2] * img1.vImgGray[i - 2, j]);
+                        mask[3] = (byte)(mask[3] * img1.vImgGray[i - 2, j + 1]);
+                        mask[4] = (byte)(mask[4] * img1.vImgGray[i - 2, j + 2]);
+
+                        mask[5] = (byte)(mask[5] * img1.vImgGray[i - 1, j - 2]);
+                        mask[6] = (byte)(mask[6] * img1.vImgGray[i - 1, j - 1]);
+                        mask[7] = (byte)(mask[7] * img1.vImgGray[i - 1, j]);
+                        mask[8] = (byte)(mask[8] * img1.vImgGray[i - 1, j + 1]);
+                        mask[9] = (byte)(mask[9] * img1.vImgGray[i - 1, j + 2]);
+
+                        mask[10] = (byte)(mask[10] * img1.vImgGray[i, j - 2]);
+                        mask[11] = (byte)(mask[11] * img1.vImgGray[i, j - 1]);
+                        mask[12] = (byte)(mask[12] * img1.vImgGray[i, j]);
+                        mask[13] = (byte)(mask[13] * img1.vImgGray[i, j + 1]);
+                        mask[14] = (byte)(mask[14] * img1.vImgGray[i, j + 2]);
+
+                        mask[15] = (byte)(mask[15] * img1.vImgGray[i + 1, j - 2]);
+                        mask[16] = (byte)(mask[16] * img1.vImgGray[i + 1, j - 1]);
+                        mask[17] = (byte)(mask[17] * img1.vImgGray[i + 1, j]);
+                        mask[18] = (byte)(mask[18] * img1.vImgGray[i + 1, j + 1]);
+                        mask[19] = (byte)(mask[19] * img1.vImgGray[i + 1, j + 2]);
+
+                        mask[20] = (byte)(mask[20] * img1.vImgGray[i + 2, j - 2]);
+                        mask[21] = (byte)(mask[21] * img1.vImgGray[i + 2, j - 1]);
+                        mask[22] = (byte)(mask[22] * img1.vImgGray[i + 2, j]);
+                        mask[23] = (byte)(mask[23] * img1.vImgGray[i + 2, j + 1]);
+                        mask[24] = (byte)(mask[24] * img1.vImgGray[i + 2, j + 2]);
+
+                    }
+                    else if(maskSize == 7)
+                    {
+                        mask[0] = (byte)(mask[0] * img1.vImgGray[i - 3, j - 3]);
+                        mask[1] = (byte)(mask[1] * img1.vImgGray[i - 3, j - 2]);
+                        mask[2] = (byte)(mask[2] * img1.vImgGray[i - 3, j - 1]);
+                        mask[3] = (byte)(mask[3] * img1.vImgGray[i - 3, j]);
+                        mask[4] = (byte)(mask[4] * img1.vImgGray[i - 3, j + 1]);
+                        mask[5] = (byte)(mask[5] * img1.vImgGray[i - 3, j + 2]);
+                        mask[6] = (byte)(mask[6] * img1.vImgGray[i - 3, j + 3]);
+
+                        mask[7] = (byte)(mask[7] * img1.vImgGray[i - 2, j - 3]);
+                        mask[8] = (byte)(mask[8] * img1.vImgGray[i - 2, j - 2]);
+                        mask[9] = (byte)(mask[9] * img1.vImgGray[i - 2, j - 1]);
+                        mask[10] = (byte)(mask[10] * img1.vImgGray[i - 2, j]);
+                        mask[11] = (byte)(mask[11] * img1.vImgGray[i - 2, j + 1]);
+                        mask[12] = (byte)(mask[12] * img1.vImgGray[i - 2, j + 2]);
+                        mask[13] = (byte)(mask[13] * img1.vImgGray[i - 2, j + 3]);
+                        
+                        mask[14] = (byte)(mask[14] * img1.vImgGray[i - 1, j - 3]);
+                        mask[15] = (byte)(mask[15] * img1.vImgGray[i - 1, j - 2]);
+                        mask[16] = (byte)(mask[16] * img1.vImgGray[i - 1, j - 1]);
+                        mask[17] = (byte)(mask[17] * img1.vImgGray[i - 1, j]);
+                        mask[18] = (byte)(mask[18] * img1.vImgGray[i - 1, j + 1]);
+                        mask[19] = (byte)(mask[19] * img1.vImgGray[i - 1, j + 2]);
+                        mask[20] = (byte)(mask[20] * img1.vImgGray[i - 1, j + 3]);
+
+                        mask[21] = (byte)(mask[21] * img1.vImgGray[i, j - 3]);
+                        mask[22] = (byte)(mask[22] * img1.vImgGray[i, j - 2]);
+                        mask[23] = (byte)(mask[23] * img1.vImgGray[i, j - 1]);
+                        mask[24] = (byte)(mask[24] * img1.vImgGray[i, j]);
+                        mask[25] = (byte)(mask[25] * img1.vImgGray[i, j + 1]);
+                        mask[26] = (byte)(mask[26] * img1.vImgGray[i, j + 2]);
+                        mask[27] = (byte)(mask[27] * img1.vImgGray[i, j + 3]);
+                        
+                        mask[28] = (byte)(mask[28] * img1.vImgGray[i + 1, j - 3]);
+                        mask[29] = (byte)(mask[29] * img1.vImgGray[i + 1, j - 2]);
+                        mask[30] = (byte)(mask[30] * img1.vImgGray[i + 1, j - 1]);
+                        mask[31] = (byte)(mask[31] * img1.vImgGray[i + 1, j]);
+                        mask[32] = (byte)(mask[32] * img1.vImgGray[i + 1, j + 1]);
+                        mask[33] = (byte)(mask[33] * img1.vImgGray[i + 1, j + 2]);
+                        mask[34] = (byte)(mask[34] * img1.vImgGray[i + 1, j + 3]);
+                        
+                        mask[35] = (byte)(mask[35] * img1.vImgGray[i + 2, j - 3]);
+                        mask[36] = (byte)(mask[36] * img1.vImgGray[i + 2, j - 2]);
+                        mask[37] = (byte)(mask[37] * img1.vImgGray[i + 2, j - 1]);
+                        mask[38] = (byte)(mask[38] * img1.vImgGray[i + 2, j]);
+                        mask[39] = (byte)(mask[39] * img1.vImgGray[i + 2, j + 1]);
+                        mask[40] = (byte)(mask[40] * img1.vImgGray[i + 2, j + 2]);
+                        mask[41] = (byte)(mask[41] * img1.vImgGray[i + 2, j + 3]);
+                        
+                        mask[42] = (byte)(mask[42] * img1.vImgGray[i + 3, j - 3]);
+                        mask[43] = (byte)(mask[43] * img1.vImgGray[i + 3, j - 2]);
+                        mask[44] = (byte)(mask[44] * img1.vImgGray[i + 3, j - 1]);
+                        mask[45] = (byte)(mask[45] * img1.vImgGray[i + 3, j]);
+                        mask[46] = (byte)(mask[46] * img1.vImgGray[i + 3, j + 1]);
+                        mask[47] = (byte)(mask[47] * img1.vImgGray[i + 3, j + 2]);
+                        mask[48] = (byte)(mask[48] * img1.vImgGray[i + 3, j + 3]);
+                    }
+
+                    if(type == 1)
+                    {
+                        byte filter = mask.Max();
+                        imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                    }
+                    else if (type == 2)
+                    {
+                        byte filter = mask.Min();
+                        imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                    }
+                    else if (type == 3)
+                    {
+                        for (int w = 0; w < mask.Length; w++)
+                        {
+                            mean = mean + mask[w];
+                        }
+
+                        mean = mean / mask.Length;
+
+                        imgResultadoHelper[j, i] = Convert.ToByte(mean);
+                    }
+                }
+            }
+
+            for (int i = 0; i < img1.height; i++)
+            {
+                for (int j = 0; j < img1.width; j++)
+                {
+                    Color c = Color.FromArgb(imgResultadoHelper[j, i], imgResultadoHelper[j, i], imgResultadoHelper[j, i]);
+                    imgResultado.SetPixel(j, i, c);
+                }
+            }
+
             return imgResultado;
         }
 
-        //Helper Normalize RGB
-        public double NormalizeRGB(double rgb)
+
+            //Helper Normalize RGB
+            public double NormalizeRGB(double rgb)
         {
             if(rgb >= 255)
             {
