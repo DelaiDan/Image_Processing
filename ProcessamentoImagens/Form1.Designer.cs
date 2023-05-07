@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.picBox1 = new System.Windows.Forms.PictureBox();
             this.picBox2 = new System.Windows.Forms.PictureBox();
             this.picBox3 = new System.Windows.Forms.PictureBox();
@@ -82,6 +82,8 @@
             this.rd_3_3 = new System.Windows.Forms.RadioButton();
             this.rd_5_5 = new System.Windows.Forms.RadioButton();
             this.bt_filter = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -163,6 +165,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nm_mult);
             this.groupBox1.Controls.Add(this.nm_div);
             this.groupBox1.Controls.Add(this.nm_Blend);
@@ -181,21 +185,21 @@
             // 
             // nm_mult
             // 
-            this.nm_mult.Location = new System.Drawing.Point(183, 105);
+            this.nm_mult.Location = new System.Drawing.Point(207, 105);
             this.nm_mult.Name = "nm_mult";
             this.nm_mult.Size = new System.Drawing.Size(84, 22);
             this.nm_mult.TabIndex = 18;
             // 
             // nm_div
             // 
-            this.nm_div.Location = new System.Drawing.Point(183, 144);
+            this.nm_div.Location = new System.Drawing.Point(207, 144);
             this.nm_div.Name = "nm_div";
             this.nm_div.Size = new System.Drawing.Size(84, 22);
             this.nm_div.TabIndex = 17;
             // 
             // nm_Blend
             // 
-            this.nm_Blend.Location = new System.Drawing.Point(183, 222);
+            this.nm_Blend.Location = new System.Drawing.Point(207, 222);
             this.nm_Blend.Name = "nm_Blend";
             this.nm_Blend.Size = new System.Drawing.Size(84, 22);
             this.nm_Blend.TabIndex = 16;
@@ -490,32 +494,32 @@
             // 
             // hist1
             // 
-            chartArea5.Name = "ChartArea1";
-            this.hist1.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.hist1.Legends.Add(legend5);
+            chartArea3.Name = "ChartArea1";
+            this.hist1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.hist1.Legends.Add(legend3);
             this.hist1.Location = new System.Drawing.Point(18, 545);
             this.hist1.Name = "hist1";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.hist1.Series.Add(series5);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.hist1.Series.Add(series3);
             this.hist1.Size = new System.Drawing.Size(445, 300);
             this.hist1.TabIndex = 15;
             this.hist1.Text = "chart1";
             // 
             // hist2
             // 
-            chartArea6.Name = "ChartArea1";
-            this.hist2.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.hist2.Legends.Add(legend6);
+            chartArea4.Name = "ChartArea1";
+            this.hist2.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.hist2.Legends.Add(legend4);
             this.hist2.Location = new System.Drawing.Point(827, 545);
             this.hist2.Name = "hist2";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.hist2.Series.Add(series6);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.hist2.Series.Add(series4);
             this.hist2.Size = new System.Drawing.Size(445, 300);
             this.hist2.TabIndex = 16;
             this.hist2.Text = "chart2";
@@ -632,6 +636,26 @@
             this.bt_filter.UseVisualStyleBackColor = true;
             this.bt_filter.Click += new System.EventHandler(this.bt_filter_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(176, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 25);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "*";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(178, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 25);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "/";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -657,6 +681,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nm_mult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nm_div)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nm_Blend)).EndInit();
@@ -730,6 +755,8 @@
         private System.Windows.Forms.RadioButton rd_max;
         private System.Windows.Forms.RadioButton rd_min;
         private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

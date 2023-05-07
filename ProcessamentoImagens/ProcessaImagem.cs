@@ -147,9 +147,9 @@ namespace ProcessamentoImagens
         }
 
         //Multiplication
-        public Bitmap MultImages(ProcessaImagem img1, ProcessaImagem img2)
+        public Bitmap MultImages(ProcessaImagem img1, ProcessaImagem img2, int multiplicador)
         {
-            if (CheckImages(img1, img2))
+            if (img1 != null)
             {
                 Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
@@ -162,13 +162,10 @@ namespace ProcessamentoImagens
                     for (int j = 0; j < img1.width; j++)
                     {
                         Color Img1Pixel = img1.img.GetPixel(j, i);
-                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
-                        //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
-
-                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.R * Img2Pixel.R));
-                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.G * Img2Pixel.G));
-                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.B * Img2Pixel.B));
+                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.R * multiplicador));
+                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.G * multiplicador));
+                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.B * multiplicador));
                         vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.A));
 
                         Color c = Color.FromArgb(
@@ -188,9 +185,9 @@ namespace ProcessamentoImagens
         }
 
         //Division
-        public Bitmap DivImages(ProcessaImagem img1, ProcessaImagem img2)
+        public Bitmap DivImages(ProcessaImagem img1, int multiplicador)
         {
-            if (CheckImages(img1, img2))
+            if (img1 != null)
             {
                 Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
@@ -202,32 +199,19 @@ namespace ProcessamentoImagens
                 double pixelG1;
                 double pixelB1;
 
-                double pixelR2;
-                double pixelG2;
-                double pixelB2;
-
-
                 for (int i = 0; i < img1.height; i++)
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
                         Color Img1Pixel = img1.img.GetPixel(j, i);
-                        Color Img2Pixel = img2.img.GetPixel(j, i);
 
                         pixelR1 = DivHelper(Img1Pixel.R);
                         pixelG1 = DivHelper(Img1Pixel.G);
                         pixelB1 = DivHelper(Img1Pixel.B);
 
-                        pixelR2 = DivHelper(Img2Pixel.R);
-                        pixelG2 = DivHelper(Img2Pixel.G);
-                        pixelB2 = DivHelper(Img2Pixel.B);
-
-
-                        //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
-
-                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(pixelR1 / pixelR2));
-                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(pixelG1 / pixelG2));
-                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(pixelB1 / pixelB2));
+                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(pixelR1 / multiplicador));
+                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(pixelG1 / multiplicador));
+                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(pixelB1 / multiplicador));
                         vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.A));
 
                         Color c = Color.FromArgb(
@@ -351,24 +335,56 @@ namespace ProcessamentoImagens
         {
             if (CheckImages(img1, img2))
             {
+                ProcessaImagem ProcessaHelper = new ProcessaImagem(null);
+                Bitmap Img1Bin = ProcessaHelper.ToBinary(img1);
+                Bitmap Img2Bin = ProcessaHelper.ToBinary(img2);
+
                 Bitmap imgResultado = new Bitmap(img1.width, img1.height);
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
                 byte[,] vImgResultA = new byte[img1.height, img1.width];
 
+                byte R, G, B;
+
                 for (int i = 0; i < img1.height; i++)
                 {
                     for (int j = 0; j < img1.width; j++)
                     {
-                        Color Img1Pixel = img1.img.GetPixel(j, i);
-                        Color Img2Pixel = img2.img.GetPixel(j, i);
+                        Color Img1Pixel = Img1Bin.GetPixel(j, i);
+                        Color Img2Pixel = Img2Bin.GetPixel(j, i);
 
-                        //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
+                        //Verify values
+                        if (Img1Pixel.R.Equals(Img2Pixel.R) || Img1Pixel.R > Img2Pixel.R)
+                        {
+                            R = Convert.ToByte(Img1Pixel.R);
+                        }
+                        else
+                        {
+                            R = Convert.ToByte(Img2Pixel.R);
+                        }
 
-                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.R & Img2Pixel.R));
-                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.G & Img2Pixel.G));
-                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.B & Img2Pixel.B));
+                        if (Img1Pixel.G.Equals(Img2Pixel.G) || Img1Pixel.G > Img2Pixel.G)
+                        {
+                            G = Convert.ToByte(Img1Pixel.G);
+                        }
+                        else
+                        {
+                            G = Convert.ToByte(Img2Pixel.G);
+                        }
+
+                        if (Img1Pixel.B.Equals(Img2Pixel.B) || Img1Pixel.B > Img2Pixel.B)
+                        {
+                            B = Convert.ToByte(Img1Pixel.B);
+                        }
+                        else
+                        {
+                            B = Convert.ToByte(Img2Pixel.B);
+                        }
+
+                        vImgResultR[i, j] = Convert.ToByte(R);
+                        vImgResultG[i, j] = Convert.ToByte(G);
+                        vImgResultB[i, j] = Convert.ToByte(B);
                         vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(Img1Pixel.A));
 
                         Color c = Color.FromArgb(
@@ -596,461 +612,488 @@ namespace ProcessamentoImagens
 
         public Bitmap MirrorImgUD(ProcessaImagem img1)
         {
-            int height = img1.height * 2;
-
-            Bitmap imgResultado = new Bitmap(img1.width, height);
-
-            byte[,] vImgResultR = new byte[height, img1.width];
-            byte[,] vImgResultG = new byte[height, img1.width];
-            byte[,] vImgResultB = new byte[height, img1.width];
-            byte[,] vImgResultA = new byte[height, img1.width];
-
-            //Get image
-            for (int i = 0; i < height; i++)
+            if (img1 != null)
             {
-                for (int j = 0; j < img1.width; j++)
+                int height = img1.height * 2;
+
+                Bitmap imgResultado = new Bitmap(img1.width, height);
+
+                byte[,] vImgResultR = new byte[height, img1.width];
+                byte[,] vImgResultG = new byte[height, img1.width];
+                byte[,] vImgResultB = new byte[height, img1.width];
+                byte[,] vImgResultA = new byte[height, img1.width];
+
+                //Get image
+                for (int i = 0; i < height; i++)
                 {
-                    if (i >= img1.height)
+                    for (int j = 0; j < img1.width; j++)
                     {
-                        vImgResultA[i, j] = img1.vImgA[Math.Abs(height - i - 1), j];
-                        vImgResultR[i, j] = img1.vImgR[Math.Abs(height - i - 1), j];
-                        vImgResultG[i, j] = img1.vImgG[Math.Abs(height - i - 1), j];
-                        vImgResultB[i, j] = img1.vImgB[Math.Abs(height - i - 1), j];
-                    }
-                    else
-                    {
-                        vImgResultA[i, j] = img1.vImgA[i, j];
-                        vImgResultR[i, j] = img1.vImgR[i, j];
-                        vImgResultG[i, j] = img1.vImgG[i, j];
-                        vImgResultB[i, j] = img1.vImgB[i, j];
+                        if (i >= img1.height)
+                        {
+                            vImgResultA[i, j] = img1.vImgA[Math.Abs(height - i - 1), j];
+                            vImgResultR[i, j] = img1.vImgR[Math.Abs(height - i - 1), j];
+                            vImgResultG[i, j] = img1.vImgG[Math.Abs(height - i - 1), j];
+                            vImgResultB[i, j] = img1.vImgB[Math.Abs(height - i - 1), j];
+                        }
+                        else
+                        {
+                            vImgResultA[i, j] = img1.vImgA[i, j];
+                            vImgResultR[i, j] = img1.vImgR[i, j];
+                            vImgResultG[i, j] = img1.vImgG[i, j];
+                            vImgResultB[i, j] = img1.vImgB[i, j];
+                        }
                     }
                 }
-            }
 
-            //Print Results
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < img1.width; j++)
+                //Print Results
+                for (int i = 0; i < height; i++)
                 {
-                    Color c = Color.FromArgb(
-                        vImgResultA[i, j],
-                        vImgResultR[i, j],
-                        vImgResultG[i, j],
-                        vImgResultB[i, j]
-                    );
+                    for (int j = 0; j < img1.width; j++)
+                    {
+                        Color c = Color.FromArgb(
+                            vImgResultA[i, j],
+                            vImgResultR[i, j],
+                            vImgResultG[i, j],
+                            vImgResultB[i, j]
+                        );
 
-                    imgResultado.SetPixel(j, i, c);
+                        imgResultado.SetPixel(j, i, c);
+                    }
                 }
-            }
 
-            return imgResultado;
+                return imgResultado;
+            }
+            return null;
         }
 
         public Bitmap MirrorImgLR(ProcessaImagem img1)
         {
-            int width = img1.width * 2;
-
-            Bitmap imgResultado = new Bitmap(width, img1.height);
-
-            byte[,] vImgResultR = new byte[img1.height, width];
-            byte[,] vImgResultG = new byte[img1.height, width];
-            byte[,] vImgResultB = new byte[img1.height, width];
-            byte[,] vImgResultA = new byte[img1.height, width];
-
-            //Get image
-            for (int i = 0; i < img1.height; i++)
+            if (img1 != null)
             {
-                for (int j = 0; j < width; j++)
+                int width = img1.width * 2;
+
+                Bitmap imgResultado = new Bitmap(width, img1.height);
+
+                byte[,] vImgResultR = new byte[img1.height, width];
+                byte[,] vImgResultG = new byte[img1.height, width];
+                byte[,] vImgResultB = new byte[img1.height, width];
+                byte[,] vImgResultA = new byte[img1.height, width];
+
+                //Get image
+                for (int i = 0; i < img1.height; i++)
                 {
-                    if (j >= img1.width)
+                    for (int j = 0; j < width; j++)
                     {
-                        vImgResultA[i, j] = img1.vImgA[i, Math.Abs(width - j - 1)];
-                        vImgResultR[i, j] = img1.vImgR[i, Math.Abs(width - j - 1)];
-                        vImgResultG[i, j] = img1.vImgG[i, Math.Abs(width - j - 1)];
-                        vImgResultB[i, j] = img1.vImgB[i, Math.Abs(width - j - 1)];
-                    }
-                    else
-                    {
-                        vImgResultA[i, j] = img1.vImgA[i, j];
-                        vImgResultR[i, j] = img1.vImgR[i, j];
-                        vImgResultG[i, j] = img1.vImgG[i, j];
-                        vImgResultB[i, j] = img1.vImgB[i, j];
+                        if (j >= img1.width)
+                        {
+                            vImgResultA[i, j] = img1.vImgA[i, Math.Abs(width - j - 1)];
+                            vImgResultR[i, j] = img1.vImgR[i, Math.Abs(width - j - 1)];
+                            vImgResultG[i, j] = img1.vImgG[i, Math.Abs(width - j - 1)];
+                            vImgResultB[i, j] = img1.vImgB[i, Math.Abs(width - j - 1)];
+                        }
+                        else
+                        {
+                            vImgResultA[i, j] = img1.vImgA[i, j];
+                            vImgResultR[i, j] = img1.vImgR[i, j];
+                            vImgResultG[i, j] = img1.vImgG[i, j];
+                            vImgResultB[i, j] = img1.vImgB[i, j];
+                        }
                     }
                 }
-            }
 
-            //Print Results
-            for (int i = 0; i < img1.height; i++)
-            {
-                for (int j = 0; j < width; j++)
+                //Print Results
+                for (int i = 0; i < img1.height; i++)
                 {
-                    Color c = Color.FromArgb(
-                        vImgResultA[i, j],
-                        vImgResultR[i, j],
-                        vImgResultG[i, j],
-                        vImgResultB[i, j]
-                    );
+                    for (int j = 0; j < width; j++)
+                    {
+                        Color c = Color.FromArgb(
+                            vImgResultA[i, j],
+                            vImgResultR[i, j],
+                            vImgResultG[i, j],
+                            vImgResultB[i, j]
+                        );
 
-                    imgResultado.SetPixel(j, i, c);
+                        imgResultado.SetPixel(j, i, c);
+                    }
                 }
-            }
 
-            return imgResultado;
+                return imgResultado;
+            }
+            return null;
         }
 
         public Bitmap ToGrayscale(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
-            byte[,] vImgResultG = new byte[img1.height, img1.width];
-            byte[,] vImgResultB = new byte[img1.height, img1.width];
-            byte[,] vImgResultR = new byte[img1.height, img1.width];
-            byte[,] vImgResultA = new byte[img1.height, img1.width];
-
-            for (int i = 0; i < img1.height; i++)
+            if (img1 != null)
             {
-                for (int j = 0; j < img1.width; j++)
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                byte[,] vImgResultG = new byte[img1.height, img1.width];
+                byte[,] vImgResultB = new byte[img1.height, img1.width];
+                byte[,] vImgResultR = new byte[img1.height, img1.width];
+                byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+                for (int i = 0; i < img1.height; i++)
                 {
+                    for (int j = 0; j < img1.width; j++)
+                    {
 
-                    vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i,j]));
-                    vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i,j]));
-                    vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i,j]));
-                    vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgA[i,j]));
+                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i, j]));
+                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i, j]));
+                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgGray[i, j]));
+                        vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(img1.vImgA[i, j]));
 
-                    Color c = Color.FromArgb(
-                        vImgResultA[i, j],
-                        vImgResultR[i, j],
-                        vImgResultG[i, j],
-                        vImgResultB[i, j]
-                        );
+                        Color c = Color.FromArgb(
+                            vImgResultA[i, j],
+                            vImgResultR[i, j],
+                            vImgResultG[i, j],
+                            vImgResultB[i, j]
+                            );
 
-                    imgResultado.SetPixel(j, i, c);
+                        imgResultado.SetPixel(j, i, c);
+                    }
                 }
-            }
 
-            return imgResultado;
+                return imgResultado;
+            }
+            return null;
         }
 
         public Bitmap ToBinary(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
-            byte[,] vImgResultG = new byte[img1.height, img1.width];
-            byte[,] vImgResultB = new byte[img1.height, img1.width];
-            byte[,] vImgResultR = new byte[img1.height, img1.width];
-            byte[,] vImgResultA = new byte[img1.height, img1.width];
-
-            for (int i = 0; i < img1.height; i++)
+            if (img1 != null)
             {
-                for (int j = 0; j < img1.width; j++)
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                byte[,] vImgResultG = new byte[img1.height, img1.width];
+                byte[,] vImgResultB = new byte[img1.height, img1.width];
+                byte[,] vImgResultR = new byte[img1.height, img1.width];
+                byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+                for (int i = 0; i < img1.height; i++)
                 {
+                    for (int j = 0; j < img1.width; j++)
+                    {
+                        vImgResultR[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgGray[i, j]));
+                        vImgResultG[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgGray[i, j]));
+                        vImgResultB[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgGray[i, j]));
+                        vImgResultA[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgA[i, j]));
 
-                    vImgResultR[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgGray[i, j]));
-                    vImgResultG[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgGray[i, j]));
-                    vImgResultB[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgGray[i, j]));
-                    vImgResultA[i, j] = Convert.ToByte(ConvertToBinary(img1.vImgA[i, j]));
+                        Color c = Color.FromArgb(
+                            vImgResultA[i, j],
+                            vImgResultR[i, j],
+                            vImgResultG[i, j],
+                            vImgResultB[i, j]
+                            );
 
-                    Color c = Color.FromArgb(
-                        vImgResultA[i, j],
-                        vImgResultR[i, j],
-                        vImgResultG[i, j],
-                        vImgResultB[i, j]
-                        );
-
-                    imgResultado.SetPixel(j, i, c);
+                        imgResultado.SetPixel(j, i, c);
+                    }
                 }
-            }
 
-            return imgResultado;
+                return imgResultado;
+            }
+            return null;
         }
 
         public Bitmap ToNegative(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
-            byte[,] vImgResultR = new byte[img1.height, img1.width];
-            byte[,] vImgResultG = new byte[img1.height, img1.width];
-            byte[,] vImgResultB = new byte[img1.height, img1.width];
-            byte[,] vImgResultA = new byte[img1.height, img1.width];
-
-            int maxR = 0;
-            int maxG = 0;
-            int maxB = 0;
-
-            for (int i = 0; i < img1.height; i++)
+            if (img1 != null)
             {
-                for (int j = 0; j < img1.width; j++)
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                byte[,] vImgResultR = new byte[img1.height, img1.width];
+                byte[,] vImgResultG = new byte[img1.height, img1.width];
+                byte[,] vImgResultB = new byte[img1.height, img1.width];
+                byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+                int maxR = 0;
+                int maxG = 0;
+                int maxB = 0;
+
+                for (int i = 0; i < img1.height; i++)
                 {
-                    Color Img1Pixel = img1.img.GetPixel(j, i);
-
-                    vImgResultR[i, j] = Img1Pixel.R;
-                    vImgResultG[i, j] = Img1Pixel.G;
-                    vImgResultB[i, j] = Img1Pixel.B;
-                    vImgResultA[i, j] = Img1Pixel.A;
-
-                    if (maxR < Img1Pixel.R)
+                    for (int j = 0; j < img1.width; j++)
                     {
-                        maxR = Img1Pixel.R;
-                    }
-                    if (maxG < Img1Pixel.G)
-                    {
-                        maxG = Img1Pixel.G;
-                    }
-                    if (maxB < Img1Pixel.B)
-                    {
-                        maxB = Img1Pixel.B;
-                    }
+                        Color Img1Pixel = img1.img.GetPixel(j, i);
 
-                    Color c = Color.FromArgb(
-                        vImgResultA[i, j],
-                        maxR - vImgResultR[i, j],
-                        maxG - vImgResultG[i, j],
-                        maxB - vImgResultB[i, j]
-                        );
+                        vImgResultR[i, j] = Img1Pixel.R;
+                        vImgResultG[i, j] = Img1Pixel.G;
+                        vImgResultB[i, j] = Img1Pixel.B;
+                        vImgResultA[i, j] = Img1Pixel.A;
 
-                    //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
+                        if (maxR < Img1Pixel.R)
+                        {
+                            maxR = Img1Pixel.R;
+                        }
+                        if (maxG < Img1Pixel.G)
+                        {
+                            maxG = Img1Pixel.G;
+                        }
+                        if (maxB < Img1Pixel.B)
+                        {
+                            maxB = Img1Pixel.B;
+                        }
 
-                    imgResultado.SetPixel(j, i, c);
+                        Color c = Color.FromArgb(
+                            vImgResultA[i, j],
+                            maxR - vImgResultR[i, j],
+                            maxG - vImgResultG[i, j],
+                            maxB - vImgResultB[i, j]
+                            );
+
+                        //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
+
+                        imgResultado.SetPixel(j, i, c);
+                    }
                 }
-            }
 
-            return imgResultado;
+                return imgResultado;
+            }
+            return null;
         }
 
         public Object[] Histogram(ProcessaImagem img1)
         {
-            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
-            byte[,] img = img1.vImgGray;
-
-            int[] histogramFinalImg = new int[256];
-
-            // Calcula o histograma da imagem
-            int[] histogram = new int[256];
-            for (int i = 0; i < img1.height; i++)
+            if (img1 != null)
             {
-                for (int j = 0; j < img1.width; j++)
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                byte[,] img = img1.vImgGray;
+
+                int[] histogramFinalImg = new int[256];
+
+                // Calcula o histograma da imagem
+                int[] histogram = new int[256];
+                for (int i = 0; i < img1.height; i++)
                 {
-                    histogram[img[i, j]]++;
+                    for (int j = 0; j < img1.width; j++)
+                    {
+                        histogram[img[i, j]]++;
+                    }
                 }
-            }
 
-            // Calcula a função de distribuição acumulada (CDF) do histograma, normalizada para ter valores entre 0 e 1
-            double[] cdf = new double[256];
-            int pixelsCount = img1.width * img1.height;
-            cdf[0] = histogram[0] / (double)pixelsCount;
+                // Calcula a função de distribuição acumulada (CDF) do histograma, normalizada para ter valores entre 0 e 1
+                double[] cdf = new double[256];
+                int pixelsCount = img1.width * img1.height;
+                cdf[0] = histogram[0] / (double)pixelsCount;
 
-            for (int i = 1; i < 256; i++)
-            {
-                cdf[i] = cdf[i - 1] + histogram[i] / (double)pixelsCount;
-            }
-
-            // Mapeia cada valor de pixel para um novo valor com base na CDF, escalonando para o intervalo [0, 255]
-            int[,] equalizedImg = new int[img1.width, img1.height];
-
-            for (int i = 0; i < img1.height; i++)
-            {
-                for (int j = 0; j < img1.width; j++)
+                for (int i = 1; i < 256; i++)
                 {
-                    int oldPixelValue = img[i, j];
-                    int newPixelValue = (int)Math.Round(cdf[oldPixelValue] * 255.0);
-                    equalizedImg[i, j] = newPixelValue;
+                    cdf[i] = cdf[i - 1] + histogram[i] / (double)pixelsCount;
                 }
-            }
 
-            for (int i = 0; i < img1.height; i++)
-            {
-                for (int j = 0; j < img1.width; j++)
+                // Mapeia cada valor de pixel para um novo valor com base na CDF, escalonando para o intervalo [0, 255]
+                int[,] equalizedImg = new int[img1.width, img1.height];
+
+                for (int i = 0; i < img1.height; i++)
                 {
-                    histogramFinalImg[equalizedImg[i, j]]++;
+                    for (int j = 0; j < img1.width; j++)
+                    {
+                        int oldPixelValue = img[i, j];
+                        int newPixelValue = (int)Math.Round(cdf[oldPixelValue] * 255.0);
+                        equalizedImg[i, j] = newPixelValue;
+                    }
                 }
-            }
 
-            for (int i = 0; i < img1.width; i++)
-            {
-                for (int j = 0; j < img1.height; j++)
+                for (int i = 0; i < img1.height; i++)
                 {
-                    Color c = Color.FromArgb(equalizedImg[i, j], equalizedImg[i, j], equalizedImg[i, j]);
-                    imgResultado.SetPixel(j, i, c);
+                    for (int j = 0; j < img1.width; j++)
+                    {
+                        histogramFinalImg[equalizedImg[i, j]]++;
+                    }
                 }
+
+                for (int i = 0; i < img1.width; i++)
+                {
+                    for (int j = 0; j < img1.height; j++)
+                    {
+                        Color c = Color.FromArgb(equalizedImg[i, j], equalizedImg[i, j], equalizedImg[i, j]);
+                        imgResultado.SetPixel(j, i, c);
+                    }
+                }
+
+                Object[] array = { imgResultado, histogram, histogramFinalImg };
+
+                return array;
             }
-
-            Object[] array = { imgResultado, histogram, histogramFinalImg };
-
-            return array;
+            return null;
         }
 
         //Image Filters
         public Bitmap ApplyFilter(ProcessaImagem img1, int maskSize = 3, int type = 1)
         {
-            Bitmap imgResultado = new Bitmap(img1.width, img1.height);
-            byte[,] imgResultadoHelper = new byte[img1.height, img1.width];
-
-            int maskI = 0;
-            int maskJ = 0;
-
-            if(maskSize == 3)
+            if(img1 != null)
             {
-                maskI = 1;
-                maskJ = 1;
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                byte[,] imgResultadoHelper = new byte[img1.height, img1.width];
 
-            } else if(maskSize == 5)
-            {
-                maskI = 2;
-                maskJ = 2;
+                int maskI = 0;
+                int maskJ = 0;
 
-            } else if(maskSize == 7)
-            {
-                maskI = 3;
-                maskJ = 3;
-            }
-
-            for (int i = maskI; i < (img1.height - maskI); i++)
-            {
-                for (int j = maskJ; j < (img1.width - maskJ); j++)
+                if(maskSize == 3)
                 {
-                    byte[] mask = new byte[maskSize * maskSize];
-                    int mean = 0;
+                    maskI = 1;
+                    maskJ = 1;
 
-                    for (int w = 0; w < mask.Length; w++) mask[w] = 1;
+                } else if(maskSize == 5)
+                {
+                    maskI = 2;
+                    maskJ = 2;
 
-                    if (maskSize == 3)
+                } else if(maskSize == 7)
+                {
+                    maskI = 3;
+                    maskJ = 3;
+                }
+
+                for (int i = maskI; i < (img1.height - maskI); i++)
+                {
+                    for (int j = maskJ; j < (img1.width - maskJ); j++)
                     {
-                        mask[0] = (byte)(mask[0] * img1.vImgGray[i - 1, j - 1]);
-                        mask[1] = (byte)(mask[1] * img1.vImgGray[i - 1, j]);
-                        mask[2] = (byte)(mask[2] * img1.vImgGray[i - 1, j + 1]);
+                        byte[] mask = new byte[maskSize * maskSize];
+                        int mean = 0;
 
-                        mask[3] = (byte)(mask[3] * img1.vImgGray[i, j - 1]);
-                        mask[4] = (byte)(mask[4] * img1.vImgGray[i, j]);
-                        mask[5] = (byte)(mask[5] * img1.vImgGray[i, j + 1]);
+                        for (int w = 0; w < mask.Length; w++) mask[w] = 1;
 
-                        mask[6] = (byte)(mask[6] * img1.vImgGray[i + 1, j - 1]);
-                        mask[7] = (byte)(mask[7] * img1.vImgGray[i + 1, j]);
-                        mask[8] = (byte)(mask[8] * img1.vImgGray[i + 1, j + 1]);
-
-                    }
-                    else if (maskSize == 5)
-                    {
-                        mask[0] = (byte)(mask[0] * img1.vImgGray[i - 2, j - 2]);
-                        mask[1] = (byte)(mask[1] * img1.vImgGray[i - 2, j - 1]);
-                        mask[2] = (byte)(mask[2] * img1.vImgGray[i - 2, j]);
-                        mask[3] = (byte)(mask[3] * img1.vImgGray[i - 2, j + 1]);
-                        mask[4] = (byte)(mask[4] * img1.vImgGray[i - 2, j + 2]);
-
-                        mask[5] = (byte)(mask[5] * img1.vImgGray[i - 1, j - 2]);
-                        mask[6] = (byte)(mask[6] * img1.vImgGray[i - 1, j - 1]);
-                        mask[7] = (byte)(mask[7] * img1.vImgGray[i - 1, j]);
-                        mask[8] = (byte)(mask[8] * img1.vImgGray[i - 1, j + 1]);
-                        mask[9] = (byte)(mask[9] * img1.vImgGray[i - 1, j + 2]);
-
-                        mask[10] = (byte)(mask[10] * img1.vImgGray[i, j - 2]);
-                        mask[11] = (byte)(mask[11] * img1.vImgGray[i, j - 1]);
-                        mask[12] = (byte)(mask[12] * img1.vImgGray[i, j]);
-                        mask[13] = (byte)(mask[13] * img1.vImgGray[i, j + 1]);
-                        mask[14] = (byte)(mask[14] * img1.vImgGray[i, j + 2]);
-
-                        mask[15] = (byte)(mask[15] * img1.vImgGray[i + 1, j - 2]);
-                        mask[16] = (byte)(mask[16] * img1.vImgGray[i + 1, j - 1]);
-                        mask[17] = (byte)(mask[17] * img1.vImgGray[i + 1, j]);
-                        mask[18] = (byte)(mask[18] * img1.vImgGray[i + 1, j + 1]);
-                        mask[19] = (byte)(mask[19] * img1.vImgGray[i + 1, j + 2]);
-
-                        mask[20] = (byte)(mask[20] * img1.vImgGray[i + 2, j - 2]);
-                        mask[21] = (byte)(mask[21] * img1.vImgGray[i + 2, j - 1]);
-                        mask[22] = (byte)(mask[22] * img1.vImgGray[i + 2, j]);
-                        mask[23] = (byte)(mask[23] * img1.vImgGray[i + 2, j + 1]);
-                        mask[24] = (byte)(mask[24] * img1.vImgGray[i + 2, j + 2]);
-
-                    }
-                    else if(maskSize == 7)
-                    {
-                        mask[0] = (byte)(mask[0] * img1.vImgGray[i - 3, j - 3]);
-                        mask[1] = (byte)(mask[1] * img1.vImgGray[i - 3, j - 2]);
-                        mask[2] = (byte)(mask[2] * img1.vImgGray[i - 3, j - 1]);
-                        mask[3] = (byte)(mask[3] * img1.vImgGray[i - 3, j]);
-                        mask[4] = (byte)(mask[4] * img1.vImgGray[i - 3, j + 1]);
-                        mask[5] = (byte)(mask[5] * img1.vImgGray[i - 3, j + 2]);
-                        mask[6] = (byte)(mask[6] * img1.vImgGray[i - 3, j + 3]);
-
-                        mask[7] = (byte)(mask[7] * img1.vImgGray[i - 2, j - 3]);
-                        mask[8] = (byte)(mask[8] * img1.vImgGray[i - 2, j - 2]);
-                        mask[9] = (byte)(mask[9] * img1.vImgGray[i - 2, j - 1]);
-                        mask[10] = (byte)(mask[10] * img1.vImgGray[i - 2, j]);
-                        mask[11] = (byte)(mask[11] * img1.vImgGray[i - 2, j + 1]);
-                        mask[12] = (byte)(mask[12] * img1.vImgGray[i - 2, j + 2]);
-                        mask[13] = (byte)(mask[13] * img1.vImgGray[i - 2, j + 3]);
-                        
-                        mask[14] = (byte)(mask[14] * img1.vImgGray[i - 1, j - 3]);
-                        mask[15] = (byte)(mask[15] * img1.vImgGray[i - 1, j - 2]);
-                        mask[16] = (byte)(mask[16] * img1.vImgGray[i - 1, j - 1]);
-                        mask[17] = (byte)(mask[17] * img1.vImgGray[i - 1, j]);
-                        mask[18] = (byte)(mask[18] * img1.vImgGray[i - 1, j + 1]);
-                        mask[19] = (byte)(mask[19] * img1.vImgGray[i - 1, j + 2]);
-                        mask[20] = (byte)(mask[20] * img1.vImgGray[i - 1, j + 3]);
-
-                        mask[21] = (byte)(mask[21] * img1.vImgGray[i, j - 3]);
-                        mask[22] = (byte)(mask[22] * img1.vImgGray[i, j - 2]);
-                        mask[23] = (byte)(mask[23] * img1.vImgGray[i, j - 1]);
-                        mask[24] = (byte)(mask[24] * img1.vImgGray[i, j]);
-                        mask[25] = (byte)(mask[25] * img1.vImgGray[i, j + 1]);
-                        mask[26] = (byte)(mask[26] * img1.vImgGray[i, j + 2]);
-                        mask[27] = (byte)(mask[27] * img1.vImgGray[i, j + 3]);
-                        
-                        mask[28] = (byte)(mask[28] * img1.vImgGray[i + 1, j - 3]);
-                        mask[29] = (byte)(mask[29] * img1.vImgGray[i + 1, j - 2]);
-                        mask[30] = (byte)(mask[30] * img1.vImgGray[i + 1, j - 1]);
-                        mask[31] = (byte)(mask[31] * img1.vImgGray[i + 1, j]);
-                        mask[32] = (byte)(mask[32] * img1.vImgGray[i + 1, j + 1]);
-                        mask[33] = (byte)(mask[33] * img1.vImgGray[i + 1, j + 2]);
-                        mask[34] = (byte)(mask[34] * img1.vImgGray[i + 1, j + 3]);
-                        
-                        mask[35] = (byte)(mask[35] * img1.vImgGray[i + 2, j - 3]);
-                        mask[36] = (byte)(mask[36] * img1.vImgGray[i + 2, j - 2]);
-                        mask[37] = (byte)(mask[37] * img1.vImgGray[i + 2, j - 1]);
-                        mask[38] = (byte)(mask[38] * img1.vImgGray[i + 2, j]);
-                        mask[39] = (byte)(mask[39] * img1.vImgGray[i + 2, j + 1]);
-                        mask[40] = (byte)(mask[40] * img1.vImgGray[i + 2, j + 2]);
-                        mask[41] = (byte)(mask[41] * img1.vImgGray[i + 2, j + 3]);
-                        
-                        mask[42] = (byte)(mask[42] * img1.vImgGray[i + 3, j - 3]);
-                        mask[43] = (byte)(mask[43] * img1.vImgGray[i + 3, j - 2]);
-                        mask[44] = (byte)(mask[44] * img1.vImgGray[i + 3, j - 1]);
-                        mask[45] = (byte)(mask[45] * img1.vImgGray[i + 3, j]);
-                        mask[46] = (byte)(mask[46] * img1.vImgGray[i + 3, j + 1]);
-                        mask[47] = (byte)(mask[47] * img1.vImgGray[i + 3, j + 2]);
-                        mask[48] = (byte)(mask[48] * img1.vImgGray[i + 3, j + 3]);
-                    }
-
-                    if(type == 1)
-                    {
-                        byte filter = mask.Max();
-                        imgResultadoHelper[j, i] = Convert.ToByte(filter);
-                    }
-                    else if (type == 2)
-                    {
-                        byte filter = mask.Min();
-                        imgResultadoHelper[j, i] = Convert.ToByte(filter);
-                    }
-                    else if (type == 3)
-                    {
-                        for (int w = 0; w < mask.Length; w++)
+                        if (maskSize == 3)
                         {
-                            mean = mean + mask[w];
+                            mask[0] = (byte)(mask[0] * img1.vImgGray[i - 1, j - 1]);
+                            mask[1] = (byte)(mask[1] * img1.vImgGray[i - 1, j]);
+                            mask[2] = (byte)(mask[2] * img1.vImgGray[i - 1, j + 1]);
+
+                            mask[3] = (byte)(mask[3] * img1.vImgGray[i, j - 1]);
+                            mask[4] = (byte)(mask[4] * img1.vImgGray[i, j]);
+                            mask[5] = (byte)(mask[5] * img1.vImgGray[i, j + 1]);
+
+                            mask[6] = (byte)(mask[6] * img1.vImgGray[i + 1, j - 1]);
+                            mask[7] = (byte)(mask[7] * img1.vImgGray[i + 1, j]);
+                            mask[8] = (byte)(mask[8] * img1.vImgGray[i + 1, j + 1]);
+
+                        }
+                        else if (maskSize == 5)
+                        {
+                            mask[0] = (byte)(mask[0] * img1.vImgGray[i - 2, j - 2]);
+                            mask[1] = (byte)(mask[1] * img1.vImgGray[i - 2, j - 1]);
+                            mask[2] = (byte)(mask[2] * img1.vImgGray[i - 2, j]);
+                            mask[3] = (byte)(mask[3] * img1.vImgGray[i - 2, j + 1]);
+                            mask[4] = (byte)(mask[4] * img1.vImgGray[i - 2, j + 2]);
+
+                            mask[5] = (byte)(mask[5] * img1.vImgGray[i - 1, j - 2]);
+                            mask[6] = (byte)(mask[6] * img1.vImgGray[i - 1, j - 1]);
+                            mask[7] = (byte)(mask[7] * img1.vImgGray[i - 1, j]);
+                            mask[8] = (byte)(mask[8] * img1.vImgGray[i - 1, j + 1]);
+                            mask[9] = (byte)(mask[9] * img1.vImgGray[i - 1, j + 2]);
+
+                            mask[10] = (byte)(mask[10] * img1.vImgGray[i, j - 2]);
+                            mask[11] = (byte)(mask[11] * img1.vImgGray[i, j - 1]);
+                            mask[12] = (byte)(mask[12] * img1.vImgGray[i, j]);
+                            mask[13] = (byte)(mask[13] * img1.vImgGray[i, j + 1]);
+                            mask[14] = (byte)(mask[14] * img1.vImgGray[i, j + 2]);
+
+                            mask[15] = (byte)(mask[15] * img1.vImgGray[i + 1, j - 2]);
+                            mask[16] = (byte)(mask[16] * img1.vImgGray[i + 1, j - 1]);
+                            mask[17] = (byte)(mask[17] * img1.vImgGray[i + 1, j]);
+                            mask[18] = (byte)(mask[18] * img1.vImgGray[i + 1, j + 1]);
+                            mask[19] = (byte)(mask[19] * img1.vImgGray[i + 1, j + 2]);
+
+                            mask[20] = (byte)(mask[20] * img1.vImgGray[i + 2, j - 2]);
+                            mask[21] = (byte)(mask[21] * img1.vImgGray[i + 2, j - 1]);
+                            mask[22] = (byte)(mask[22] * img1.vImgGray[i + 2, j]);
+                            mask[23] = (byte)(mask[23] * img1.vImgGray[i + 2, j + 1]);
+                            mask[24] = (byte)(mask[24] * img1.vImgGray[i + 2, j + 2]);
+
+                        }
+                        else if(maskSize == 7)
+                        {
+                            mask[0] = (byte)(mask[0] * img1.vImgGray[i - 3, j - 3]);
+                            mask[1] = (byte)(mask[1] * img1.vImgGray[i - 3, j - 2]);
+                            mask[2] = (byte)(mask[2] * img1.vImgGray[i - 3, j - 1]);
+                            mask[3] = (byte)(mask[3] * img1.vImgGray[i - 3, j]);
+                            mask[4] = (byte)(mask[4] * img1.vImgGray[i - 3, j + 1]);
+                            mask[5] = (byte)(mask[5] * img1.vImgGray[i - 3, j + 2]);
+                            mask[6] = (byte)(mask[6] * img1.vImgGray[i - 3, j + 3]);
+
+                            mask[7] = (byte)(mask[7] * img1.vImgGray[i - 2, j - 3]);
+                            mask[8] = (byte)(mask[8] * img1.vImgGray[i - 2, j - 2]);
+                            mask[9] = (byte)(mask[9] * img1.vImgGray[i - 2, j - 1]);
+                            mask[10] = (byte)(mask[10] * img1.vImgGray[i - 2, j]);
+                            mask[11] = (byte)(mask[11] * img1.vImgGray[i - 2, j + 1]);
+                            mask[12] = (byte)(mask[12] * img1.vImgGray[i - 2, j + 2]);
+                            mask[13] = (byte)(mask[13] * img1.vImgGray[i - 2, j + 3]);
+                        
+                            mask[14] = (byte)(mask[14] * img1.vImgGray[i - 1, j - 3]);
+                            mask[15] = (byte)(mask[15] * img1.vImgGray[i - 1, j - 2]);
+                            mask[16] = (byte)(mask[16] * img1.vImgGray[i - 1, j - 1]);
+                            mask[17] = (byte)(mask[17] * img1.vImgGray[i - 1, j]);
+                            mask[18] = (byte)(mask[18] * img1.vImgGray[i - 1, j + 1]);
+                            mask[19] = (byte)(mask[19] * img1.vImgGray[i - 1, j + 2]);
+                            mask[20] = (byte)(mask[20] * img1.vImgGray[i - 1, j + 3]);
+
+                            mask[21] = (byte)(mask[21] * img1.vImgGray[i, j - 3]);
+                            mask[22] = (byte)(mask[22] * img1.vImgGray[i, j - 2]);
+                            mask[23] = (byte)(mask[23] * img1.vImgGray[i, j - 1]);
+                            mask[24] = (byte)(mask[24] * img1.vImgGray[i, j]);
+                            mask[25] = (byte)(mask[25] * img1.vImgGray[i, j + 1]);
+                            mask[26] = (byte)(mask[26] * img1.vImgGray[i, j + 2]);
+                            mask[27] = (byte)(mask[27] * img1.vImgGray[i, j + 3]);
+                        
+                            mask[28] = (byte)(mask[28] * img1.vImgGray[i + 1, j - 3]);
+                            mask[29] = (byte)(mask[29] * img1.vImgGray[i + 1, j - 2]);
+                            mask[30] = (byte)(mask[30] * img1.vImgGray[i + 1, j - 1]);
+                            mask[31] = (byte)(mask[31] * img1.vImgGray[i + 1, j]);
+                            mask[32] = (byte)(mask[32] * img1.vImgGray[i + 1, j + 1]);
+                            mask[33] = (byte)(mask[33] * img1.vImgGray[i + 1, j + 2]);
+                            mask[34] = (byte)(mask[34] * img1.vImgGray[i + 1, j + 3]);
+                        
+                            mask[35] = (byte)(mask[35] * img1.vImgGray[i + 2, j - 3]);
+                            mask[36] = (byte)(mask[36] * img1.vImgGray[i + 2, j - 2]);
+                            mask[37] = (byte)(mask[37] * img1.vImgGray[i + 2, j - 1]);
+                            mask[38] = (byte)(mask[38] * img1.vImgGray[i + 2, j]);
+                            mask[39] = (byte)(mask[39] * img1.vImgGray[i + 2, j + 1]);
+                            mask[40] = (byte)(mask[40] * img1.vImgGray[i + 2, j + 2]);
+                            mask[41] = (byte)(mask[41] * img1.vImgGray[i + 2, j + 3]);
+                        
+                            mask[42] = (byte)(mask[42] * img1.vImgGray[i + 3, j - 3]);
+                            mask[43] = (byte)(mask[43] * img1.vImgGray[i + 3, j - 2]);
+                            mask[44] = (byte)(mask[44] * img1.vImgGray[i + 3, j - 1]);
+                            mask[45] = (byte)(mask[45] * img1.vImgGray[i + 3, j]);
+                            mask[46] = (byte)(mask[46] * img1.vImgGray[i + 3, j + 1]);
+                            mask[47] = (byte)(mask[47] * img1.vImgGray[i + 3, j + 2]);
+                            mask[48] = (byte)(mask[48] * img1.vImgGray[i + 3, j + 3]);
                         }
 
-                        mean = mean / mask.Length;
+                        if(type == 1)
+                        {
+                            byte filter = mask.Max();
+                            imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                        }
+                        else if (type == 2)
+                        {
+                            byte filter = mask.Min();
+                            imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                        }
+                        else if (type == 3)
+                        {
+                            for (int w = 0; w < mask.Length; w++)
+                            {
+                                mean = mean + mask[w];
+                            }
 
-                        imgResultadoHelper[j, i] = Convert.ToByte(mean);
+                            mean = mean / mask.Length;
+
+                            imgResultadoHelper[j, i] = Convert.ToByte(mean);
+                        }
                     }
                 }
-            }
 
-            for (int i = 0; i < img1.height; i++)
-            {
-                for (int j = 0; j < img1.width; j++)
+                for (int i = 0; i < img1.height; i++)
                 {
-                    Color c = Color.FromArgb(imgResultadoHelper[j, i], imgResultadoHelper[j, i], imgResultadoHelper[j, i]);
-                    imgResultado.SetPixel(j, i, c);
+                    for (int j = 0; j < img1.width; j++)
+                    {
+                        Color c = Color.FromArgb(imgResultadoHelper[j, i], imgResultadoHelper[j, i], imgResultadoHelper[j, i]);
+                        imgResultado.SetPixel(j, i, c);
+                    }
                 }
-            }
 
-            return imgResultado;
+                return imgResultado;
+            }
+            return null;
         }
 
 
@@ -1095,7 +1138,7 @@ namespace ProcessamentoImagens
             return rgb;
         }
 
-        public bool CheckImages(ProcessaImagem img1, ProcessaImagem img2)
+        public bool CheckImages(ProcessaImagem img1 = null, ProcessaImagem img2 = null)
         {
             if (img1.img.Width != img2.img.Width || img1.img.Height != img2.img.Height || img1.img.PixelFormat != img1.img.PixelFormat)
             {

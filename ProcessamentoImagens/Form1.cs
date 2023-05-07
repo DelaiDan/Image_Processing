@@ -89,6 +89,7 @@ namespace ProcessamentoImagens
         private void bt_NOT_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
+
             Bitmap imgResultado = ProcessaHelper.LogicNOT(Processa1, Processa2);
             if (imgResultado != null)
             {
@@ -99,10 +100,18 @@ namespace ProcessamentoImagens
         private void bt_Mult_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            Bitmap imgResultado = ProcessaHelper.MultImages(Processa1, Processa2);
-            if (imgResultado != null)
+            int mult = Convert.ToInt32(nm_mult.Value);
+            if(mult > 0)
             {
-                picBox3.Image = new Bitmap(imgResultado);
+                Bitmap imgResultado = ProcessaHelper.MultImages(Processa1, Processa2, mult);
+                if (imgResultado != null)
+                {
+                    picBox3.Image = new Bitmap(imgResultado);
+                }
+            }
+            else
+            {
+                MessageBox.Show("O Multiplicador deverá ser MAIOR que 0");
             }
         }
 
@@ -119,10 +128,18 @@ namespace ProcessamentoImagens
         private void bt_Div_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            Bitmap imgResultado = ProcessaHelper.DivImages(Processa1, Processa2);
-            if (imgResultado != null)
+            int mult = Convert.ToInt32(nm_div.Value);
+            if(mult > 0)
             {
-                picBox3.Image = new Bitmap(imgResultado);
+                Bitmap imgResultado = ProcessaHelper.DivImages(Processa1, mult);
+                if (imgResultado != null)
+                {
+                    picBox3.Image = new Bitmap(imgResultado);
+                }
+            }
+            else
+            {
+                MessageBox.Show("O Multiplicador deverá ser MAIOR que 0");
             }
         }
 
@@ -130,10 +147,17 @@ namespace ProcessamentoImagens
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             int scalar = Convert.ToInt32(nm_Blend.Value);
-            Bitmap imgResultado = ProcessaHelper.BlendImages(Processa1, Processa2, scalar);
-            if (imgResultado != null)
+            if(scalar > 0)
             {
-                picBox3.Image = new Bitmap(imgResultado);
+                Bitmap imgResultado = ProcessaHelper.BlendImages(Processa1, Processa2, scalar);
+                if (imgResultado != null)
+                {
+                    picBox3.Image = new Bitmap(imgResultado);
+                }
+            }
+            else
+            {
+                MessageBox.Show("O Multiplicador deverá ser MAIOR que 0");
             }
         }
 
@@ -249,26 +273,29 @@ namespace ProcessamentoImagens
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             Object[] obj = ProcessaHelper.Histogram(Processa1);
-            Bitmap imgResultado = (Bitmap)obj[0];
-
-            if (imgResultado != null)
+            if(obj != null)
             {
-                int[] histogram = (int[])obj[1];
-                int[] histogramFinalImg = (int[])obj[2];
+                Bitmap imgResultado = (Bitmap)obj[0];
 
-                hist1.Series.Clear();
-                hist1.Series.Add("Histograma");
-                hist1.Series["Histograma"].ChartType = SeriesChartType.Column;
-                hist1.Series["Histograma"].Points.DataBindY(histogram);
-                hist1.ChartAreas[0].AxisY.Maximum = histogram.Max() + 10;
+                if (imgResultado != null)
+                {
+                    int[] histogram = (int[])obj[1];
+                    int[] histogramFinalImg = (int[])obj[2];
 
-                hist2.Series.Clear();
-                hist2.Series.Add("ImgResult");
-                hist2.Series["ImgResult"].ChartType = SeriesChartType.Column;
-                hist2.Series["ImgResult"].Points.DataBindY(histogramFinalImg);
-                hist2.ChartAreas[0].AxisY.Maximum = histogramFinalImg.Max() + 10;
+                    hist1.Series.Clear();
+                    hist1.Series.Add("Histograma");
+                    hist1.Series["Histograma"].ChartType = SeriesChartType.Column;
+                    hist1.Series["Histograma"].Points.DataBindY(histogram);
+                    hist1.ChartAreas[0].AxisY.Maximum = histogram.Max() + 10;
+
+                    hist2.Series.Clear();
+                    hist2.Series.Add("ImgResult");
+                    hist2.Series["ImgResult"].ChartType = SeriesChartType.Column;
+                    hist2.Series["ImgResult"].Points.DataBindY(histogramFinalImg);
+                    hist2.ChartAreas[0].AxisY.Maximum = histogramFinalImg.Max() + 10;
                 
-                picBox3.Image = new Bitmap(imgResultado);
+                    picBox3.Image = new Bitmap(imgResultado);
+                }
             }
         }
 
