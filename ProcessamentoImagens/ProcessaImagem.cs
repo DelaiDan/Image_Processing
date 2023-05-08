@@ -833,12 +833,10 @@ namespace ProcessamentoImagens
 
                         Color c = Color.FromArgb(
                             vImgResultA[i, j],
-                            maxR - vImgResultR[i, j],
-                            maxG - vImgResultG[i, j],
-                            maxB - vImgResultB[i, j]
+                            Convert.ToByte(NormalizeRGB(maxR - vImgResultR[i, j])),
+                            Convert.ToByte(NormalizeRGB(maxG - vImgResultG[i, j])),
+                            Convert.ToByte(NormalizeRGB(maxB - vImgResultB[i, j]))
                             );
-
-                        //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
 
                         imgResultado.SetPixel(j, i, c);
                     }
@@ -1140,29 +1138,19 @@ namespace ProcessamentoImagens
 
         public bool CheckImages(ProcessaImagem img1 = null, ProcessaImagem img2 = null)
         {
+            if(img1 == null || img2 == null)
+            {
+                MessageBox.Show("Imagens VAZIAS!");
+                return false;
+            }
+
             if (img1.img.Width != img2.img.Width || img1.img.Height != img2.img.Height || img1.img.PixelFormat != img1.img.PixelFormat)
             {
                 MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato");
                 return false;
             }
+
             return true;
-        }
-
-        //Debug
-        public void ShowMatrix(byte[,] matrix)
-        {
-            int row = matrix.GetLength(0);
-            int columns = matrix.GetLength(1);
-
-            for(int i = 0; i < row; i++)
-            {
-                for(int j = 0; j < columns; j++)
-                {
-                    Console.Write(string.Format("{0} ", matrix[i, j]));
-                }
-                Console.Write(Environment.NewLine + Environment.NewLine);
-            }
-            Console.ReadLine();
         }
     }
 }
