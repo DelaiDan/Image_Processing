@@ -305,6 +305,7 @@ namespace ProcessamentoImagens
 
             int maskSize = 3;
             int tipoFiltro = 1;
+            int order = 0;
 
             //Filter Size (3x3, 5x5, 7x7)
             if (rd_3_3.Checked)
@@ -320,7 +321,7 @@ namespace ProcessamentoImagens
                 maskSize = 7;
             }
 
-            //Filter Type (MAX, MIN, MED)
+            //Filter Type (MAX, MIN, MED, ...)
             if (rd_max.Checked)
             {
                 tipoFiltro = 1;
@@ -333,8 +334,27 @@ namespace ProcessamentoImagens
             {
                 tipoFiltro = 3;
             }
+            else if (rd_mediana.Checked)
+            {
+                tipoFiltro = 4;
+            }
+            else if (rd_ordem.Checked)
+            {
+                tipoFiltro = 5;
+                order = Convert.ToInt32(nm_order.Value);
+                if (order <= 0)
+                {
+                    MessageBox.Show("Insira uma Ordem Válida!", "Ordem Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (rd_suav.Checked)
+            {
+                tipoFiltro = 6;
+            }
 
-            Bitmap imgResultado = ProcessaHelper.ApplyFilter(Processa1, maskSize, tipoFiltro);
+            Bitmap imgResultado = ProcessaHelper.ApplyFilter(Processa1, maskSize, tipoFiltro, order);
 
             if (imgResultado != null)
             {

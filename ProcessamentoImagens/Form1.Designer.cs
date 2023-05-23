@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.picBox1 = new System.Windows.Forms.PictureBox();
             this.picBox2 = new System.Windows.Forms.PictureBox();
             this.picBox3 = new System.Windows.Forms.PictureBox();
@@ -41,6 +41,8 @@
             this.bt_load2 = new System.Windows.Forms.Button();
             this.bt_saveResult = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.nm_mult = new System.Windows.Forms.NumericUpDown();
             this.nm_div = new System.Windows.Forms.NumericUpDown();
             this.nm_Blend = new System.Windows.Forms.NumericUpDown();
@@ -82,8 +84,10 @@
             this.rd_3_3 = new System.Windows.Forms.RadioButton();
             this.rd_5_5 = new System.Windows.Forms.RadioButton();
             this.bt_filter = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.rd_mediana = new System.Windows.Forms.RadioButton();
+            this.rd_ordem = new System.Windows.Forms.RadioButton();
+            this.rd_suav = new System.Windows.Forms.RadioButton();
+            this.nm_order = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -104,6 +108,7 @@
             this.groupBox9.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_order)).BeginInit();
             this.SuspendLayout();
             // 
             // picBox1
@@ -182,6 +187,26 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operações Aritméticas";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(178, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 25);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "/";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(176, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 25);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "*";
             // 
             // nm_mult
             // 
@@ -357,7 +382,7 @@
             this.groupBox6.Controls.Add(this.lb_tam);
             this.groupBox6.Controls.Add(this.nm_tam);
             this.groupBox6.Controls.Add(this.bt_randMat);
-            this.groupBox6.Location = new System.Drawing.Point(620, 394);
+            this.groupBox6.Location = new System.Drawing.Point(321, 394);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(348, 100);
             this.groupBox6.TabIndex = 12;
@@ -494,32 +519,32 @@
             // 
             // hist1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.hist1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.hist1.Legends.Add(legend3);
+            chartArea7.Name = "ChartArea1";
+            this.hist1.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.hist1.Legends.Add(legend7);
             this.hist1.Location = new System.Drawing.Point(18, 545);
             this.hist1.Name = "hist1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.hist1.Series.Add(series3);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.hist1.Series.Add(series7);
             this.hist1.Size = new System.Drawing.Size(445, 300);
             this.hist1.TabIndex = 15;
             this.hist1.Text = "chart1";
             // 
             // hist2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.hist2.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.hist2.Legends.Add(legend4);
+            chartArea8.Name = "ChartArea1";
+            this.hist2.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.hist2.Legends.Add(legend8);
             this.hist2.Location = new System.Drawing.Point(827, 545);
             this.hist2.Name = "hist2";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.hist2.Series.Add(series4);
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.hist2.Series.Add(series8);
             this.hist2.Size = new System.Drawing.Size(445, 300);
             this.hist2.TabIndex = 16;
             this.hist2.Text = "chart2";
@@ -529,21 +554,25 @@
             this.groupBox9.Controls.Add(this.groupBox11);
             this.groupBox9.Controls.Add(this.groupBox10);
             this.groupBox9.Controls.Add(this.bt_filter);
-            this.groupBox9.Location = new System.Drawing.Point(980, 394);
+            this.groupBox9.Location = new System.Drawing.Point(778, 394);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(292, 141);
+            this.groupBox9.Size = new System.Drawing.Size(494, 141);
             this.groupBox9.TabIndex = 21;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Realce de Imagens";
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.nm_order);
+            this.groupBox11.Controls.Add(this.rd_suav);
+            this.groupBox11.Controls.Add(this.rd_ordem);
             this.groupBox11.Controls.Add(this.rd_med);
             this.groupBox11.Controls.Add(this.rd_max);
+            this.groupBox11.Controls.Add(this.rd_mediana);
             this.groupBox11.Controls.Add(this.rd_min);
             this.groupBox11.Location = new System.Drawing.Point(6, 27);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(280, 48);
+            this.groupBox11.Size = new System.Drawing.Size(272, 110);
             this.groupBox11.TabIndex = 17;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Tipo";
@@ -551,12 +580,12 @@
             // rd_med
             // 
             this.rd_med.AutoSize = true;
-            this.rd_med.Location = new System.Drawing.Point(216, 21);
+            this.rd_med.Location = new System.Drawing.Point(190, 21);
             this.rd_med.Name = "rd_med";
-            this.rd_med.Size = new System.Drawing.Size(58, 20);
+            this.rd_med.Size = new System.Drawing.Size(70, 20);
             this.rd_med.TabIndex = 15;
             this.rd_med.TabStop = true;
-            this.rd_med.Text = "MED";
+            this.rd_med.Text = "MEDIA";
             this.rd_med.UseVisualStyleBackColor = true;
             // 
             // rd_max
@@ -573,7 +602,7 @@
             // rd_min
             // 
             this.rd_min.AutoSize = true;
-            this.rd_min.Location = new System.Drawing.Point(117, 21);
+            this.rd_min.Location = new System.Drawing.Point(105, 21);
             this.rd_min.Name = "rd_min";
             this.rd_min.Size = new System.Drawing.Size(52, 20);
             this.rd_min.TabIndex = 14;
@@ -586,9 +615,9 @@
             this.groupBox10.Controls.Add(this.rd_7_7);
             this.groupBox10.Controls.Add(this.rd_3_3);
             this.groupBox10.Controls.Add(this.rd_5_5);
-            this.groupBox10.Location = new System.Drawing.Point(6, 84);
+            this.groupBox10.Location = new System.Drawing.Point(284, 29);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(196, 48);
+            this.groupBox10.Size = new System.Drawing.Size(204, 48);
             this.groupBox10.TabIndex = 16;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Tamanho";
@@ -628,7 +657,7 @@
             // 
             // bt_filter
             // 
-            this.bt_filter.Location = new System.Drawing.Point(208, 81);
+            this.bt_filter.Location = new System.Drawing.Point(410, 83);
             this.bt_filter.Name = "bt_filter";
             this.bt_filter.Size = new System.Drawing.Size(78, 54);
             this.bt_filter.TabIndex = 10;
@@ -636,25 +665,60 @@
             this.bt_filter.UseVisualStyleBackColor = true;
             this.bt_filter.Click += new System.EventHandler(this.bt_filter_Click);
             // 
-            // label1
+            // rd_mediana
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(176, 105);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 25);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "*";
+            this.rd_mediana.AutoSize = true;
+            this.rd_mediana.Location = new System.Drawing.Point(6, 52);
+            this.rd_mediana.Name = "rd_mediana";
+            this.rd_mediana.Size = new System.Drawing.Size(89, 20);
+            this.rd_mediana.TabIndex = 16;
+            this.rd_mediana.TabStop = true;
+            this.rd_mediana.Text = "MEDIANA";
+            this.rd_mediana.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // rd_ordem
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(178, 141);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 25);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "/";
+            this.rd_ordem.AutoSize = true;
+            this.rd_ordem.Location = new System.Drawing.Point(6, 78);
+            this.rd_ordem.Name = "rd_ordem";
+            this.rd_ordem.Size = new System.Drawing.Size(78, 20);
+            this.rd_ordem.TabIndex = 17;
+            this.rd_ordem.TabStop = true;
+            this.rd_ordem.Text = "ORDEM";
+            this.rd_ordem.UseVisualStyleBackColor = true;
+            // 
+            // rd_suav
+            // 
+            this.rd_suav.AutoSize = true;
+            this.rd_suav.Location = new System.Drawing.Point(147, 52);
+            this.rd_suav.Name = "rd_suav";
+            this.rd_suav.Size = new System.Drawing.Size(113, 20);
+            this.rd_suav.TabIndex = 18;
+            this.rd_suav.TabStop = true;
+            this.rd_suav.Text = "SUAVIZAÇÃO";
+            this.rd_suav.UseVisualStyleBackColor = true;
+            // 
+            // nm_order
+            // 
+            this.nm_order.Location = new System.Drawing.Point(108, 78);
+            this.nm_order.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.nm_order.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nm_order.Name = "nm_order";
+            this.nm_order.Size = new System.Drawing.Size(152, 22);
+            this.nm_order.TabIndex = 21;
+            this.nm_order.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
@@ -701,6 +765,7 @@
             this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_order)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -757,6 +822,10 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rd_mediana;
+        private System.Windows.Forms.RadioButton rd_suav;
+        private System.Windows.Forms.RadioButton rd_ordem;
+        private System.Windows.Forms.NumericUpDown nm_order;
     }
 }
 

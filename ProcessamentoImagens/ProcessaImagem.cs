@@ -914,7 +914,7 @@ namespace ProcessamentoImagens
         }
 
         //Image Filters
-        public Bitmap ApplyFilter(ProcessaImagem img1, int maskSize = 3, int type = 1)
+        public Bitmap ApplyFilter(ProcessaImagem img1, int maskSize = 3, int type = 1, int order = 0)
         {
             if(img1 != null)
             {
@@ -1077,6 +1077,53 @@ namespace ProcessamentoImagens
 
                             imgResultadoHelper[j, i] = Convert.ToByte(mean);
                         }
+                        else if (type == 4)
+                        {
+                            Array.Sort(mask);
+                            int selector = mask.Length / 2;
+                            byte filter = mask[selector];
+                            imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                        }
+                        else if (type == 5)
+                        {
+                            int tam = mask.Length - 1;
+
+                            if(order > tam)
+                            {
+                                order = tam;
+                            }
+
+                            if(order < 0)
+                            {
+                                order = 0;
+                            }
+
+                            Array.Sort(mask);
+                            byte filter = mask[order];
+                            imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                        }
+                        else if (type == 6)
+                        {
+                            Array.Sort(mask);
+                            byte max = mask.Max();
+                            byte min = mask.Min();
+
+                            int selector = mask.Length / 2;
+
+                            byte filter = mask[selector];
+
+                            if (mask[selector] > max)
+                            {
+                                filter = max;
+                            }
+
+                            if(mask[selector] < min)
+                            {
+                                filter = min;
+                            }
+
+                            imgResultadoHelper[j, i] = Convert.ToByte(filter);
+                        }
                     }
                 }
 
@@ -1095,8 +1142,8 @@ namespace ProcessamentoImagens
         }
 
 
-            //Helper Normalize RGB
-            public double NormalizeRGB(double rgb)
+        //Helper Normalize RGB
+        public double NormalizeRGB(double rgb)
         {
             if(rgb >= 255)
             {
