@@ -1141,6 +1141,117 @@ namespace ProcessamentoImagens
             return null;
         }
 
+        //Gaussiano
+        public Bitmap GaussianFilter(ProcessaImagem img1, double sigma)
+        {
+            if (img1 != null)
+            {
+                int width = img1.width;
+                int height = img1.height;
+
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                byte[,] vImgResultR = new byte[img1.height, img1.width];
+                byte[,] vImgResultG = new byte[img1.height, img1.width];
+                byte[,] vImgResultB = new byte[img1.height, img1.width];
+                byte[,] vImgResultA = new byte[img1.height, img1.width];
+
+                double[,] kernel = GenerateGaussianKernel(sigma);
+
+                int kernelSize = kernel.GetLength(0);
+                int kernelOffset = kernelSize / 2;
+
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        double redSum = 0;
+                        double greenSum = 0;
+                        double blueSum = 0;
+                        double weightSum = 0;
+                        double alpha = 1;
+
+                        for (int ky = 0; ky < kernelSize; ky++)
+                        {
+                            int offsetY = i + ky - kernelOffset;
+
+                            if (offsetY < 0 || offsetY >= height)
+                            {
+                                continue;
+                            }
+
+                            for (int kx = 0; kx < kernelSize; kx++)
+                            {
+                                int offsetX = j + kx - kernelOffset;
+
+                                if (offsetX < 0 || offsetX >= width)
+                                {
+                                    continue;
+                                }
+
+                                Color pixel = img1.img.GetPixel(offsetX, offsetY);
+
+                                double weight = kernel[ky, kx];
+
+                                redSum += pixel.R * weight;
+                                greenSum += pixel.G * weight;
+                                blueSum += pixel.B * weight;
+                                alpha = pixel.A;
+
+                                weightSum += weight;
+                            }
+                        }
+
+                        vImgResultR[i, j] = Convert.ToByte(NormalizeRGB(redSum / weightSum));
+                        vImgResultG[i, j] = Convert.ToByte(NormalizeRGB(greenSum / weightSum));
+                        vImgResultB[i, j] = Convert.ToByte(NormalizeRGB(blueSum / weightSum));
+                        vImgResultA[i, j] = Convert.ToByte(NormalizeRGB(alpha));
+
+                        Color c = Color.FromArgb(
+                            vImgResultA[i, j],
+                            vImgResultR[i, j],
+                            vImgResultG[i, j],
+                            vImgResultB[i, j]
+                        );
+
+                        imgResultado.SetPixel(j, i, c);
+                    }
+                }
+
+                return imgResultado;
+            }
+            return null;
+        }
+
+        //Criar Kernel para Gaussiano
+        private double[,] GenerateGaussianKernel(double sigma)
+        {
+            int size = (int)Math.Ceiling(sigma) * 2 + 1;
+            double[,] kernel = new double[size, size];
+
+            double sum = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    double exponent = -((j - size / 2) * (j - size / 2) + (i - size / 2) * (i - size / 2)) / (2 * sigma * sigma);
+                    double weight = Math.Exp(exponent);
+                    kernel[i, j] = weight;
+                    sum += weight;
+                }
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    kernel[i, j] /= sum;
+                }
+            }
+
+            return kernel;
+        }
+
 
         //Helper Normalize RGB
         public double NormalizeRGB(double rgb)

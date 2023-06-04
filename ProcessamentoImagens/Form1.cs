@@ -361,5 +361,16 @@ namespace ProcessamentoImagens
                 picBox3.Image = new Bitmap(imgResultado);
             }
         }
+
+        private void bt_gauss_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            double sigmaGauss = 5;
+            Bitmap imgResultado = ProcessaHelper.GaussianFilter(Processa1, sigmaGauss);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
+        }
     }
 }

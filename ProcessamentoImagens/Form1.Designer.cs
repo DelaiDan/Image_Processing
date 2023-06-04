@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.picBox1 = new System.Windows.Forms.PictureBox();
             this.picBox2 = new System.Windows.Forms.PictureBox();
             this.picBox3 = new System.Windows.Forms.PictureBox();
@@ -76,18 +76,19 @@
             this.hist2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.nm_order = new System.Windows.Forms.NumericUpDown();
+            this.rd_suav = new System.Windows.Forms.RadioButton();
+            this.rd_ordem = new System.Windows.Forms.RadioButton();
             this.rd_med = new System.Windows.Forms.RadioButton();
             this.rd_max = new System.Windows.Forms.RadioButton();
+            this.rd_mediana = new System.Windows.Forms.RadioButton();
             this.rd_min = new System.Windows.Forms.RadioButton();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.rd_7_7 = new System.Windows.Forms.RadioButton();
             this.rd_3_3 = new System.Windows.Forms.RadioButton();
             this.rd_5_5 = new System.Windows.Forms.RadioButton();
             this.bt_filter = new System.Windows.Forms.Button();
-            this.rd_mediana = new System.Windows.Forms.RadioButton();
-            this.rd_ordem = new System.Windows.Forms.RadioButton();
-            this.rd_suav = new System.Windows.Forms.RadioButton();
-            this.nm_order = new System.Windows.Forms.NumericUpDown();
+            this.bt_gauss = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -107,8 +108,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.hist2)).BeginInit();
             this.groupBox9.SuspendLayout();
             this.groupBox11.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nm_order)).BeginInit();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // picBox1
@@ -382,7 +383,7 @@
             this.groupBox6.Controls.Add(this.lb_tam);
             this.groupBox6.Controls.Add(this.nm_tam);
             this.groupBox6.Controls.Add(this.bt_randMat);
-            this.groupBox6.Location = new System.Drawing.Point(321, 394);
+            this.groupBox6.Location = new System.Drawing.Point(424, 394);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(348, 100);
             this.groupBox6.TabIndex = 12;
@@ -499,8 +500,9 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.bt_gauss);
             this.groupBox8.Controls.Add(this.bt_hist);
-            this.groupBox8.Location = new System.Drawing.Point(198, 394);
+            this.groupBox8.Location = new System.Drawing.Point(136, 394);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(112, 141);
             this.groupBox8.TabIndex = 14;
@@ -519,32 +521,32 @@
             // 
             // hist1
             // 
-            chartArea7.Name = "ChartArea1";
-            this.hist1.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.hist1.Legends.Add(legend7);
+            chartArea3.Name = "ChartArea1";
+            this.hist1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.hist1.Legends.Add(legend3);
             this.hist1.Location = new System.Drawing.Point(18, 545);
             this.hist1.Name = "hist1";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.hist1.Series.Add(series7);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.hist1.Series.Add(series3);
             this.hist1.Size = new System.Drawing.Size(445, 300);
             this.hist1.TabIndex = 15;
             this.hist1.Text = "chart1";
             // 
             // hist2
             // 
-            chartArea8.Name = "ChartArea1";
-            this.hist2.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.hist2.Legends.Add(legend8);
+            chartArea4.Name = "ChartArea1";
+            this.hist2.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.hist2.Legends.Add(legend4);
             this.hist2.Location = new System.Drawing.Point(827, 545);
             this.hist2.Name = "hist2";
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.hist2.Series.Add(series8);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.hist2.Series.Add(series4);
             this.hist2.Size = new System.Drawing.Size(445, 300);
             this.hist2.TabIndex = 16;
             this.hist2.Text = "chart2";
@@ -577,6 +579,50 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Tipo";
             // 
+            // nm_order
+            // 
+            this.nm_order.Location = new System.Drawing.Point(108, 78);
+            this.nm_order.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.nm_order.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nm_order.Name = "nm_order";
+            this.nm_order.Size = new System.Drawing.Size(152, 22);
+            this.nm_order.TabIndex = 21;
+            this.nm_order.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // rd_suav
+            // 
+            this.rd_suav.AutoSize = true;
+            this.rd_suav.Location = new System.Drawing.Point(147, 52);
+            this.rd_suav.Name = "rd_suav";
+            this.rd_suav.Size = new System.Drawing.Size(113, 20);
+            this.rd_suav.TabIndex = 18;
+            this.rd_suav.TabStop = true;
+            this.rd_suav.Text = "SUAVIZAÇÃO";
+            this.rd_suav.UseVisualStyleBackColor = true;
+            // 
+            // rd_ordem
+            // 
+            this.rd_ordem.AutoSize = true;
+            this.rd_ordem.Location = new System.Drawing.Point(6, 78);
+            this.rd_ordem.Name = "rd_ordem";
+            this.rd_ordem.Size = new System.Drawing.Size(78, 20);
+            this.rd_ordem.TabIndex = 17;
+            this.rd_ordem.TabStop = true;
+            this.rd_ordem.Text = "ORDEM";
+            this.rd_ordem.UseVisualStyleBackColor = true;
+            // 
             // rd_med
             // 
             this.rd_med.AutoSize = true;
@@ -598,6 +644,17 @@
             this.rd_max.TabStop = true;
             this.rd_max.Text = "MAX";
             this.rd_max.UseVisualStyleBackColor = true;
+            // 
+            // rd_mediana
+            // 
+            this.rd_mediana.AutoSize = true;
+            this.rd_mediana.Location = new System.Drawing.Point(6, 52);
+            this.rd_mediana.Name = "rd_mediana";
+            this.rd_mediana.Size = new System.Drawing.Size(89, 20);
+            this.rd_mediana.TabIndex = 16;
+            this.rd_mediana.TabStop = true;
+            this.rd_mediana.Text = "MEDIANA";
+            this.rd_mediana.UseVisualStyleBackColor = true;
             // 
             // rd_min
             // 
@@ -665,60 +722,15 @@
             this.bt_filter.UseVisualStyleBackColor = true;
             this.bt_filter.Click += new System.EventHandler(this.bt_filter_Click);
             // 
-            // rd_mediana
+            // bt_gauss
             // 
-            this.rd_mediana.AutoSize = true;
-            this.rd_mediana.Location = new System.Drawing.Point(6, 52);
-            this.rd_mediana.Name = "rd_mediana";
-            this.rd_mediana.Size = new System.Drawing.Size(89, 20);
-            this.rd_mediana.TabIndex = 16;
-            this.rd_mediana.TabStop = true;
-            this.rd_mediana.Text = "MEDIANA";
-            this.rd_mediana.UseVisualStyleBackColor = true;
-            // 
-            // rd_ordem
-            // 
-            this.rd_ordem.AutoSize = true;
-            this.rd_ordem.Location = new System.Drawing.Point(6, 78);
-            this.rd_ordem.Name = "rd_ordem";
-            this.rd_ordem.Size = new System.Drawing.Size(78, 20);
-            this.rd_ordem.TabIndex = 17;
-            this.rd_ordem.TabStop = true;
-            this.rd_ordem.Text = "ORDEM";
-            this.rd_ordem.UseVisualStyleBackColor = true;
-            // 
-            // rd_suav
-            // 
-            this.rd_suav.AutoSize = true;
-            this.rd_suav.Location = new System.Drawing.Point(147, 52);
-            this.rd_suav.Name = "rd_suav";
-            this.rd_suav.Size = new System.Drawing.Size(113, 20);
-            this.rd_suav.TabIndex = 18;
-            this.rd_suav.TabStop = true;
-            this.rd_suav.Text = "SUAVIZAÇÃO";
-            this.rd_suav.UseVisualStyleBackColor = true;
-            // 
-            // nm_order
-            // 
-            this.nm_order.Location = new System.Drawing.Point(108, 78);
-            this.nm_order.Maximum = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.nm_order.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nm_order.Name = "nm_order";
-            this.nm_order.Size = new System.Drawing.Size(152, 22);
-            this.nm_order.TabIndex = 21;
-            this.nm_order.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.bt_gauss.Location = new System.Drawing.Point(6, 60);
+            this.bt_gauss.Name = "bt_gauss";
+            this.bt_gauss.Size = new System.Drawing.Size(102, 33);
+            this.bt_gauss.TabIndex = 10;
+            this.bt_gauss.Text = "Gaussiano";
+            this.bt_gauss.UseVisualStyleBackColor = true;
+            this.bt_gauss.Click += new System.EventHandler(this.bt_gauss_Click);
             // 
             // Form1
             // 
@@ -763,9 +775,9 @@
             this.groupBox9.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_order)).EndInit();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_order)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -826,6 +838,7 @@
         private System.Windows.Forms.RadioButton rd_suav;
         private System.Windows.Forms.RadioButton rd_ordem;
         private System.Windows.Forms.NumericUpDown nm_order;
+        private System.Windows.Forms.Button bt_gauss;
     }
 }
 
