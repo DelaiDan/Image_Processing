@@ -1142,7 +1142,7 @@ namespace ProcessamentoImagens
         }
 
         //Gaussiano
-        public Bitmap GaussianFilter(ProcessaImagem img1, double sigma)
+        public Object[] GaussianFilter(ProcessaImagem img1, double sigma)
         {
             if (img1 != null)
             {
@@ -1150,6 +1150,8 @@ namespace ProcessamentoImagens
                 int height = img1.height;
 
                 Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+                Bitmap kernelImage = new Bitmap(img1.width, img1.height);
+
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
@@ -1170,27 +1172,27 @@ namespace ProcessamentoImagens
                         double weightSum = 0;
                         double alpha = 1;
 
-                        for (int ky = 0; ky < kernelSize; ky++)
+                        for (int ki = 0; ki < kernelSize; ki++)
                         {
-                            int offsetY = i + ky - kernelOffset;
+                            int offsetI = i + ki - kernelOffset;
 
-                            if (offsetY < 0 || offsetY >= height)
+                            if (offsetI < 0 || offsetI >= height)
                             {
                                 continue;
                             }
 
-                            for (int kx = 0; kx < kernelSize; kx++)
+                            for (int kj = 0; kj < kernelSize; kj++)
                             {
-                                int offsetX = j + kx - kernelOffset;
+                                int offsetJ = j + kj - kernelOffset;
 
-                                if (offsetX < 0 || offsetX >= width)
+                                if (offsetJ < 0 || offsetJ >= width)
                                 {
                                     continue;
                                 }
 
-                                Color pixel = img1.img.GetPixel(offsetX, offsetY);
+                                Color pixel = img1.img.GetPixel(offsetJ, offsetI);
 
-                                double weight = kernel[ky, kx];
+                                double weight = kernel[ki, kj];
 
                                 redSum += pixel.R * weight;
                                 greenSum += pixel.G * weight;
@@ -1198,6 +1200,10 @@ namespace ProcessamentoImagens
                                 alpha = pixel.A;
 
                                 weightSum += weight;
+
+                                int grayValue = (int)(kernel[ki, kj]);
+                                Color ck = Color.FromArgb(grayValue, grayValue, grayValue);
+                                kernelImage.SetPixel(j, i, ck);
                             }
                         }
 
@@ -1217,7 +1223,8 @@ namespace ProcessamentoImagens
                     }
                 }
 
-                return imgResultado;
+                Object[] array = { imgResultado, kernelImage };
+                return array;
             }
             return null;
         }

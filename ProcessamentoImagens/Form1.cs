@@ -365,11 +365,15 @@ namespace ProcessamentoImagens
         private void bt_gauss_Click(object sender, EventArgs e)
         {
             ProcessaHelper = new ProcessaImagem(bmpHelper);
-            double sigmaGauss = 5;
-            Bitmap imgResultado = ProcessaHelper.GaussianFilter(Processa1, sigmaGauss);
-            if (imgResultado != null)
+            double sigmaGauss = Convert.ToDouble(nm_gauss.Value);
+            Object[] obj = ProcessaHelper.GaussianFilter(Processa1, sigmaGauss);
+            if (obj != null)
             {
+                Bitmap imgResultado = (Bitmap)obj[0];
+                Bitmap imgKernel = (Bitmap)obj[1];
+
                 picBox3.Image = new Bitmap(imgResultado);
+                picBox_Gauss.Image = new Bitmap(imgKernel);
             }
         }
     }
