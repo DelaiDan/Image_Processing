@@ -376,5 +376,29 @@ namespace ProcessamentoImagens
                 picBox_Gauss.Image = new Bitmap(imgKernel);
             }
         }
+
+        private void bt_erosao_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            int tam = (int)nm_TF.Value;
+
+            Bitmap imgResultado = ProcessaHelper.Erosao(Processa1, tam, 1, cb_R.Checked, cb_G.Checked, cb_B.Checked);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
+        }
+
+        private void bt_dilatacao_Click(object sender, EventArgs e)
+        {
+            ProcessaHelper = new ProcessaImagem(bmpHelper);
+            int tam = (int)nm_TF.Value;
+
+            Bitmap imgResultado = ProcessaHelper.Erosao(Processa1, tam, 0, cb_R.Checked, cb_G.Checked, cb_B.Checked);
+            if (imgResultado != null)
+            {
+                picBox3.Image = new Bitmap(imgResultado);
+            }
+        }
     }
 }

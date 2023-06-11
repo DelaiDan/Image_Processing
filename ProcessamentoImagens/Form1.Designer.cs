@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.Label label3;
             this.picBox1 = new System.Windows.Forms.PictureBox();
             this.picBox2 = new System.Windows.Forms.PictureBox();
             this.picBox3 = new System.Windows.Forms.PictureBox();
@@ -71,6 +72,8 @@
             this.bt_binario = new System.Windows.Forms.Button();
             this.bt_grayscale = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.nm_gauss = new System.Windows.Forms.NumericUpDown();
+            this.bt_gauss = new System.Windows.Forms.Button();
             this.bt_hist = new System.Windows.Forms.Button();
             this.hist1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.hist2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -88,10 +91,16 @@
             this.rd_3_3 = new System.Windows.Forms.RadioButton();
             this.rd_5_5 = new System.Windows.Forms.RadioButton();
             this.bt_filter = new System.Windows.Forms.Button();
-            this.bt_gauss = new System.Windows.Forms.Button();
-            this.nm_gauss = new System.Windows.Forms.NumericUpDown();
             this.picBox_Gauss = new System.Windows.Forms.PictureBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.bt_erosao = new System.Windows.Forms.Button();
+            this.bt_dilatacao = new System.Windows.Forms.Button();
+            this.cb_R = new System.Windows.Forms.CheckBox();
+            this.cb_G = new System.Windows.Forms.CheckBox();
+            this.cb_B = new System.Windows.Forms.CheckBox();
+            this.nm_TF = new System.Windows.Forms.NumericUpDown();
+            label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox3)).BeginInit();
@@ -107,15 +116,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_gauss)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hist1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hist2)).BeginInit();
             this.groupBox9.SuspendLayout();
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nm_order)).BeginInit();
             this.groupBox10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_gauss)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Gauss)).BeginInit();
             this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_TF)).BeginInit();
             this.SuspendLayout();
             // 
             // picBox1
@@ -516,6 +527,38 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Outras";
             // 
+            // nm_gauss
+            // 
+            this.nm_gauss.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nm_gauss.Location = new System.Drawing.Point(6, 105);
+            this.nm_gauss.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nm_gauss.Name = "nm_gauss";
+            this.nm_gauss.Size = new System.Drawing.Size(100, 22);
+            this.nm_gauss.TabIndex = 21;
+            this.nm_gauss.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // bt_gauss
+            // 
+            this.bt_gauss.Location = new System.Drawing.Point(6, 60);
+            this.bt_gauss.Name = "bt_gauss";
+            this.bt_gauss.Size = new System.Drawing.Size(102, 33);
+            this.bt_gauss.TabIndex = 10;
+            this.bt_gauss.Text = "Gaussiano";
+            this.bt_gauss.UseVisualStyleBackColor = true;
+            this.bt_gauss.Click += new System.EventHandler(this.bt_gauss_Click);
+            // 
             // bt_hist
             // 
             this.bt_hist.Location = new System.Drawing.Point(6, 21);
@@ -528,32 +571,32 @@
             // 
             // hist1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.hist1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.hist1.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.hist1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.hist1.Legends.Add(legend3);
             this.hist1.Location = new System.Drawing.Point(18, 545);
             this.hist1.Name = "hist1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.hist1.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.hist1.Series.Add(series3);
             this.hist1.Size = new System.Drawing.Size(445, 300);
             this.hist1.TabIndex = 15;
             this.hist1.Text = "chart1";
             // 
             // hist2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.hist2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.hist2.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.hist2.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.hist2.Legends.Add(legend4);
             this.hist2.Location = new System.Drawing.Point(827, 545);
             this.hist2.Name = "hist2";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.hist2.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.hist2.Series.Add(series4);
             this.hist2.Size = new System.Drawing.Size(445, 300);
             this.hist2.TabIndex = 16;
             this.hist2.Text = "chart2";
@@ -729,43 +772,6 @@
             this.bt_filter.UseVisualStyleBackColor = true;
             this.bt_filter.Click += new System.EventHandler(this.bt_filter_Click);
             // 
-            // bt_gauss
-            // 
-            this.bt_gauss.Location = new System.Drawing.Point(6, 67);
-            this.bt_gauss.Name = "bt_gauss";
-            this.bt_gauss.Size = new System.Drawing.Size(102, 33);
-            this.bt_gauss.TabIndex = 10;
-            this.bt_gauss.Text = "Gaussiano";
-            this.bt_gauss.UseVisualStyleBackColor = true;
-            this.bt_gauss.Click += new System.EventHandler(this.bt_gauss_Click);
-            // 
-            // nm_gauss
-            // 
-            this.nm_gauss.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.nm_gauss.Location = new System.Drawing.Point(6, 105);
-            this.nm_gauss.Maximum = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.nm_gauss.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nm_gauss.Name = "nm_gauss";
-            this.nm_gauss.Size = new System.Drawing.Size(100, 22);
-            this.nm_gauss.TabIndex = 21;
-            this.nm_gauss.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // picBox_Gauss
             // 
             this.picBox_Gauss.Location = new System.Drawing.Point(6, 24);
@@ -785,11 +791,109 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Kernel Gaussiano";
             // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(label3);
+            this.groupBox13.Controls.Add(this.nm_TF);
+            this.groupBox13.Controls.Add(this.cb_B);
+            this.groupBox13.Controls.Add(this.cb_G);
+            this.groupBox13.Controls.Add(this.cb_R);
+            this.groupBox13.Controls.Add(this.bt_dilatacao);
+            this.groupBox13.Controls.Add(this.bt_erosao);
+            this.groupBox13.Location = new System.Drawing.Point(470, 545);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(351, 136);
+            this.groupBox13.TabIndex = 23;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Trabalho Final";
+            // 
+            // bt_erosao
+            // 
+            this.bt_erosao.Location = new System.Drawing.Point(6, 21);
+            this.bt_erosao.Name = "bt_erosao";
+            this.bt_erosao.Size = new System.Drawing.Size(102, 33);
+            this.bt_erosao.TabIndex = 22;
+            this.bt_erosao.Text = "Erosão";
+            this.bt_erosao.UseVisualStyleBackColor = true;
+            this.bt_erosao.Click += new System.EventHandler(this.bt_erosao_Click);
+            // 
+            // bt_dilatacao
+            // 
+            this.bt_dilatacao.Location = new System.Drawing.Point(6, 60);
+            this.bt_dilatacao.Name = "bt_dilatacao";
+            this.bt_dilatacao.Size = new System.Drawing.Size(102, 33);
+            this.bt_dilatacao.TabIndex = 23;
+            this.bt_dilatacao.Text = "Dilatação";
+            this.bt_dilatacao.UseVisualStyleBackColor = true;
+            this.bt_dilatacao.Click += new System.EventHandler(this.bt_dilatacao_Click);
+            // 
+            // cb_R
+            // 
+            this.cb_R.AutoSize = true;
+            this.cb_R.Location = new System.Drawing.Point(156, 21);
+            this.cb_R.Name = "cb_R";
+            this.cb_R.Size = new System.Drawing.Size(39, 20);
+            this.cb_R.TabIndex = 24;
+            this.cb_R.Text = "R";
+            this.cb_R.UseVisualStyleBackColor = true;
+            // 
+            // cb_G
+            // 
+            this.cb_G.AutoSize = true;
+            this.cb_G.Location = new System.Drawing.Point(156, 47);
+            this.cb_G.Name = "cb_G";
+            this.cb_G.Size = new System.Drawing.Size(39, 20);
+            this.cb_G.TabIndex = 25;
+            this.cb_G.Text = "G";
+            this.cb_G.UseVisualStyleBackColor = true;
+            // 
+            // cb_B
+            // 
+            this.cb_B.AutoSize = true;
+            this.cb_B.Location = new System.Drawing.Point(156, 73);
+            this.cb_B.Name = "cb_B";
+            this.cb_B.Size = new System.Drawing.Size(38, 20);
+            this.cb_B.TabIndex = 26;
+            this.cb_B.Text = "B";
+            this.cb_B.UseVisualStyleBackColor = true;
+            // 
+            // nm_TF
+            // 
+            this.nm_TF.Location = new System.Drawing.Point(156, 99);
+            this.nm_TF.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.nm_TF.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nm_TF.Name = "nm_TF";
+            this.nm_TF.Size = new System.Drawing.Size(152, 22);
+            this.nm_TF.TabIndex = 22;
+            this.nm_TF.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(6, 105);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(111, 16);
+            label3.TabIndex = 27;
+            label3.Text = "Tamanho (N x N):";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1289, 868);
+            this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.hist2);
@@ -824,6 +928,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nm_tam)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nm_gauss)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hist1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hist2)).EndInit();
             this.groupBox9.ResumeLayout(false);
@@ -832,9 +937,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nm_order)).EndInit();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nm_gauss)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Gauss)).EndInit();
             this.groupBox12.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_TF)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -899,6 +1006,13 @@
         private System.Windows.Forms.NumericUpDown nm_gauss;
         private System.Windows.Forms.PictureBox picBox_Gauss;
         private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Button bt_erosao;
+        private System.Windows.Forms.Button bt_dilatacao;
+        private System.Windows.Forms.CheckBox cb_B;
+        private System.Windows.Forms.CheckBox cb_G;
+        private System.Windows.Forms.CheckBox cb_R;
+        private System.Windows.Forms.NumericUpDown nm_TF;
     }
 }
 

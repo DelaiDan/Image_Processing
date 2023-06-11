@@ -1150,14 +1150,15 @@ namespace ProcessamentoImagens
                 int height = img1.height;
 
                 Bitmap imgResultado = new Bitmap(img1.width, img1.height);
-                Bitmap kernelImage = new Bitmap(img1.width, img1.height);
 
                 byte[,] vImgResultR = new byte[img1.height, img1.width];
                 byte[,] vImgResultG = new byte[img1.height, img1.width];
                 byte[,] vImgResultB = new byte[img1.height, img1.width];
                 byte[,] vImgResultA = new byte[img1.height, img1.width];
 
-                double[,] kernel = GenerateGaussianKernel(sigma);
+                Object[] obj = GenerateGaussianKernel(sigma);
+
+                double[,] kernel = (double[,])obj[0];
 
                 int kernelSize = kernel.GetLength(0);
                 int kernelOffset = kernelSize / 2;
@@ -1200,10 +1201,6 @@ namespace ProcessamentoImagens
                                 alpha = pixel.A;
 
                                 weightSum += weight;
-
-                                int grayValue = (int)(kernel[ki, kj]);
-                                Color ck = Color.FromArgb(grayValue, grayValue, grayValue);
-                                kernelImage.SetPixel(j, i, ck);
                             }
                         }
 
@@ -1223,17 +1220,20 @@ namespace ProcessamentoImagens
                     }
                 }
 
-                Object[] array = { imgResultado, kernelImage };
+                Object[] array = { imgResultado, (Bitmap)obj[1] };
                 return array;
             }
             return null;
         }
 
         //Criar Kernel para Gaussiano
-        private double[,] GenerateGaussianKernel(double sigma)
+        private Object[] GenerateGaussianKernel(double sigma)
         {
+
             int size = (int)Math.Ceiling(sigma) * 2 + 1;
+
             double[,] kernel = new double[size, size];
+            Bitmap kernelImage = new Bitmap(size, size);
 
             double sum = 0;
 
@@ -1256,7 +1256,164 @@ namespace ProcessamentoImagens
                 }
             }
 
-            return kernel;
+            for(int i = 0; i < size; i++)
+            {
+                for(int j = 0; j < size; j++)
+                {
+                    Color ck = Color.FromArgb(
+                        (int)NormalizeRGB(kernel[i, j]),
+                        (int)NormalizeRGB(kernel[i, j]),
+                        (int)NormalizeRGB(kernel[i, j])
+                    );
+
+                    kernelImage.SetPixel(j, i, ck);
+                }
+            }
+
+            Object[] array = { kernel, kernelImage };
+            return array;
+        }
+
+        //Trabalho Final
+        //Erosão
+        public Bitmap Erosao(ProcessaImagem img1, int matrixSize, int operation, bool applyR, bool applyG, bool applyB)
+        {
+            if (img1 != null)
+            {
+                Bitmap sourceBitmap = img1.img;
+
+                Bitmap imgResultado = new Bitmap(img1.width, img1.height);
+
+                BitmapData sourceData =
+                           sourceBitmap.LockBits(new Rectangle(0, 0,
+                           sourceBitmap.Width, sourceBitmap.Height),
+                           ImageLockMode.ReadOnly,
+                           PixelFormat.Format32bppArgb
+                );
+
+                byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
+                byte[] resultBuffer = new byte[sourceData.Stride * sourceData.Height];
+
+                Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
+
+                sourceBitmap.UnlockBits(sourceData);
+
+                int filterOffset = (matrixSize - 1) / 2;
+                int calcOffset = 0;
+
+                int byteOffset = 0;
+
+                byte blue = 0;
+                byte green = 0;
+                byte red = 0;
+
+                byte morphResetValue = 0;
+
+                //Erosao
+                if (operation == 1)
+                {
+                    morphResetValue = 255;
+                }
+
+                for (int offsetY = filterOffset; offsetY < sourceBitmap.Height - filterOffset; offsetY++)
+                {
+                    for (int offsetX = filterOffset; offsetX < sourceBitmap.Width - filterOffset; offsetX++)
+                    {
+                        byteOffset = offsetY * sourceData.Stride + offsetX * 4;
+
+                        blue = morphResetValue;
+                        green = morphResetValue;
+                        red = morphResetValue;
+
+                        //Dilatacao
+                        if(operation == 0)
+                        {
+                            for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
+                            {
+                                for (int filterX = -filterOffset;
+                                    filterX <= filterOffset; filterX++)
+                                {
+                                    calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
+
+                                    if (pixelBuffer[calcOffset] > blue)
+                                    {
+                                        blue = pixelBuffer[calcOffset];
+                                    }
+
+                                    if (pixelBuffer[calcOffset + 1] > green)
+                                    {
+                                        green = pixelBuffer[calcOffset + 1];
+                                    }
+
+                                    if (pixelBuffer[calcOffset + 2] > red)
+                                    {
+                                        red = pixelBuffer[calcOffset + 2];
+                                    }
+                                }
+                            }
+                        }
+                        else if(operation == 1)
+                        {
+                            for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
+                            {
+                                for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
+                                {
+                                    calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
+
+                                    if (pixelBuffer[calcOffset] < blue)
+                                    {
+                                        blue = pixelBuffer[calcOffset];
+                                    }
+
+                                    if (pixelBuffer[calcOffset + 1] < green)
+                                    {
+                                        green = pixelBuffer[calcOffset + 1];
+                                    }
+
+                                    if (pixelBuffer[calcOffset + 2] < red)
+                                    {
+                                        red = pixelBuffer[calcOffset + 2];
+                                    }
+                                }
+                            }
+                        }
+
+                        //Cores que serão aplicadas
+                        if (applyR)
+                        {
+                            red = (byte)NormalizeRGB(pixelBuffer[byteOffset + 2]);
+                        }
+                        if (applyG)
+                        {
+                            green = (byte)NormalizeRGB(pixelBuffer[byteOffset + 1]);
+                        }
+                        if (applyB)
+                        {
+                            blue = (byte)NormalizeRGB(pixelBuffer[byteOffset]);
+                        }
+
+                        resultBuffer[byteOffset] = blue;
+                        resultBuffer[byteOffset + 1] = green;
+                        resultBuffer[byteOffset + 2] = red;
+                        resultBuffer[byteOffset + 3] = 255;
+                    }
+                }
+
+                BitmapData resultData =
+                   imgResultado.LockBits(new Rectangle(0, 0,
+                   imgResultado.Width, imgResultado.Height),
+                   ImageLockMode.WriteOnly,
+                   PixelFormat.Format32bppArgb
+                );
+
+                Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
+
+                imgResultado.UnlockBits(resultData);
+
+                return imgResultado;
+            }
+
+            return null;
         }
 
 
