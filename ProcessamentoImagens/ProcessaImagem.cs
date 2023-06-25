@@ -1276,7 +1276,7 @@ namespace ProcessamentoImagens
 
         //Trabalho Final
         //Erosão
-        public Bitmap Erosao(ProcessaImagem img1, int matrixSize, int operation, bool applyR, bool applyG, bool applyB)
+        public Bitmap ApplyMorfological(ProcessaImagem img1, int matrixSize, int operation, bool applyR, bool applyG, bool applyB)
         {
             if (img1 != null)
             {
@@ -1284,6 +1284,7 @@ namespace ProcessamentoImagens
 
                 Bitmap imgResultado = new Bitmap(img1.width, img1.height);
 
+                //Copia Imagem
                 BitmapData sourceData =
                            sourceBitmap.LockBits(new Rectangle(0, 0,
                            sourceBitmap.Width, sourceBitmap.Height),
@@ -1291,6 +1292,7 @@ namespace ProcessamentoImagens
                            PixelFormat.Format32bppArgb
                 );
 
+                //Stride = Largura "Real"
                 byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
                 byte[] resultBuffer = new byte[sourceData.Stride * sourceData.Height];
 

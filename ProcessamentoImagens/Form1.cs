@@ -382,7 +382,7 @@ namespace ProcessamentoImagens
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             int tam = (int)nm_TF.Value;
 
-            Bitmap imgResultado = ProcessaHelper.Erosao(Processa1, tam, 1, cb_R.Checked, cb_G.Checked, cb_B.Checked);
+            Bitmap imgResultado = ProcessaHelper.ApplyMorfological(Processa1, tam, 1, cb_R.Checked, cb_G.Checked, cb_B.Checked);
             if (imgResultado != null)
             {
                 picBox3.Image = new Bitmap(imgResultado);
@@ -394,7 +394,7 @@ namespace ProcessamentoImagens
             ProcessaHelper = new ProcessaImagem(bmpHelper);
             int tam = (int)nm_TF.Value;
 
-            Bitmap imgResultado = ProcessaHelper.Erosao(Processa1, tam, 0, cb_R.Checked, cb_G.Checked, cb_B.Checked);
+            Bitmap imgResultado = ProcessaHelper.ApplyMorfological(Processa1, tam, 0, cb_R.Checked, cb_G.Checked, cb_B.Checked);
             if (imgResultado != null)
             {
                 picBox3.Image = new Bitmap(imgResultado);
